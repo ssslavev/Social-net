@@ -10,10 +10,14 @@ export class PostsService {
 
   getAllPosts() {
 
-    this.http.get('http://my-social-net/api/posts')
-      .subscribe(res => console.log(res)),
-      error => console.error(error);
+    return this.http.get('http://my-social-net/api/posts');
 
+  }
+
+  addPost(content: string, user_id: number) {
+    return this.http.post('http://my-social-net/api/posts', {content, user_id})
+    .subscribe(res=>console.log(res),
+    error=>console.log(error));
   }
 }
 

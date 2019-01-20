@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
+import { Component, OnInit, OnChanges, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { Observable } from 'rxjs';
@@ -11,32 +11,24 @@ import { Observable } from 'rxjs';
 export class NavigationComponent implements OnInit {
 
   isLoggedIn$: Observable<boolean>;
-
-  isLogged: boolean;
-  username: string;
+  user$: Observable<string>;
 
   constructor(private router: Router,
     private authService: AuthService) { }
 
   ngOnInit() {
-    if (localStorage.getItem('token')) {
-      this.username = localStorage.getItem('logged-user-name');
-      
-    }
 
+    this.user$ = this.authService.loggedUser;
     this.isLoggedIn$ = this.authService.isLoggedIn;
-    
+  }
+
+  logOut() {
+    localStorage.clear();
+    this.router.navigate(['/']);
+    location.reload();
+
+
   }
 
 
-    logOut() {
-      localStorage.clear();
-      this.isLogged = false;
-      this.router.navigate(['/']);
-      location.reload();
-
-
-    }
-
-
-  }
+}

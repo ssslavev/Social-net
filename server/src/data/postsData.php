@@ -29,7 +29,8 @@ class PostsData {
 
         $sql = 'SELECT post_id, content, created_at, u.user_id, name FROM
         posts p LEFT JOIN users u
-        ON p.user_id = u.user_id';
+        ON p.user_id = u.user_id
+        ORDER BY created_at DESC';
 
         try {
             $db = new Db();

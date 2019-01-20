@@ -11,7 +11,7 @@ class PostsController {
 
         $content = $request->getParam('content');
         $created_at = date('Y-m-d H:i:s');
-        $user_id = 2;
+        $user_id = $request->getParam('user_id');
 
         $post = ['content'=>$content, 'created_at'=>$created_at, 'user_id'=>$user_id];
 

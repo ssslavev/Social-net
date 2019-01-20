@@ -24,14 +24,9 @@ export class LoginComponent implements OnInit {
 
   login() {
     const { username, password } = this.user;
-    this.authService.login(username, password)
-      .subscribe(user => {
-        localStorage.setItem('token', user['token']);
-        localStorage.setItem('logged-user-id', user['user']['user_id']);
-        localStorage.setItem('logged-user-name', user['user']['name']);
-      },
-        error => console.error(error));
-    this.router.navigate(['/home']);
+    this.authService.login(username, password);
+    
+    
   }
 
 }
