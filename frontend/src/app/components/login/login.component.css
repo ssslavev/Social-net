@@ -1,0 +1,11 @@
+.login {
+    margin-top: 60px;
+}
+
+#login-form {
+    margin: 15px;
+}
+
+.panel-login>.panel-heading {
+    padding: 15px;
+}

@@ -1,0 +1,15 @@
+.login {
+    margin-top: 60px;
+}
+
+.panel-body {
+    margin: 15px;
+}
+
+.panel-login>.panel-heading {
+    padding: 15px;
+}
+
+.radio-inline {
+    padding-left: 10px;
+}

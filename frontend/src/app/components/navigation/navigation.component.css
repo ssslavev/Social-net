@@ -9,3 +9,7 @@ a:hover {
    .navbar-light .navbar-brand {
        color: white;
    }
+
+   .form-inline {
+    padding-left: 10px;
+}   
