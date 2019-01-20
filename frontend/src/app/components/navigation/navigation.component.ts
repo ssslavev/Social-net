@@ -10,16 +10,16 @@ import { Observable } from 'rxjs';
 })
 export class NavigationComponent implements OnInit {
 
-  isLoggedIn$: Observable<boolean>;
-  user$: Observable<string>;
+  isLoggedIn$;
+  user$;
 
   constructor(private router: Router,
     private authService: AuthService) { }
 
   ngOnInit() {
 
-    this.user$ = this.authService.loggedUser;
-    this.isLoggedIn$ = this.authService.isLoggedIn;
+    this.user$ = localStorage.getItem('logged-user-name');
+    this.isLoggedIn$ = localStorage.getItem('logged-user-id');
   }
 
   logOut() {

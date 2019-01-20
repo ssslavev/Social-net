@@ -13,17 +13,17 @@
       <li class="navbar-nav mr-auto">
         <a class="nav-link" routerLink='/requests'>Requests</a>
       </li>
-      <li *ngIf="!(isLoggedIn$ | async)" class="nav-item">
+      <li *ngIf="!(isLoggedIn$)" class="nav-item">
         <a class="nav-link" routerLink='/register'>Register</a>
       </li>
-      <li  *ngIf="!(isLoggedIn$ | async)" class="navbar-nav mr-auto">
+      <li  *ngIf="!(isLoggedIn$)" class="navbar-nav mr-auto">
         <a class="nav-link" routerLink='/login'>Login</a>
       </li>
-      <li *ngIf="isLoggedIn$ | async" class="navbar-nav mr-auto">
+      <li *ngIf="isLoggedIn$" class="navbar-nav mr-auto">
         <a class="nav-link" (click) = "logOut()">Logout</a>
       </li>
       <li  class="navbar-nav mr-auto">
-        <a class="nav-link">{{user$ | async}}</a>
+        <a class="nav-link">{{user$}}</a>
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">
