@@ -12,4 +12,14 @@ a:hover {
 
    .form-inline {
     padding-left: 10px;
-}   
+} 
+
+.nav-link:hover {
+    filter: brightness(70%);
+    transform: scale(1.1);
+}
+
+.active {
+   color: #53A3CD !important;
+   transform: scale(1.2);
+}
