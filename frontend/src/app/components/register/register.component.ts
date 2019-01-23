@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service'
 import { Router } from '@angular/router';
+import { NotificationsService } from 'src/app/services/notifications.service';
 
 @Component({
   selector: 'app-register',
@@ -8,6 +9,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+
+  error;
+  success;
+
 
   user = {
     username: '',
@@ -18,7 +23,8 @@ export class RegisterComponent implements OnInit {
   }
 
   constructor(private authService: AuthService,
-    private router: Router) { }
+    private router: Router,
+    private notificationService: NotificationsService) { }
 
 
 
@@ -28,8 +34,17 @@ export class RegisterComponent implements OnInit {
   registerUser() {
 
     const { username, password, firstName, lastName, email } = this.user;
-    this.authService.register(username, password, firstName, lastName, email);
-    this.router.navigate(['/']);
+    this.authService.register(username, password, firstName, lastName, email)
+      .subscribe(res => {
+        if (res['message'] === "Username already exists!") {
+          this.notificationService.emit(res['message']);
+        } else {
+          this.notificationService.emit(res['message']);
+          this.router.navigate(['/login']);
+        }
+      },
+        error => console.log(error));
+
   }
 
 }

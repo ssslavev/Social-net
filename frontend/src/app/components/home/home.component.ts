@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PostsService } from 'src/app/services/posts.service';
+import { NotificationsService } from 'src/app/services/notifications.service';
 
 @Component({
   selector: 'app-home',
@@ -7,8 +8,11 @@ import { PostsService } from 'src/app/services/posts.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+ 
 
   posts;
+  loggedIn;
+  id: number;
 
   post = {
     content: '',
@@ -17,18 +21,31 @@ export class HomeComponent implements OnInit {
 
 
 
-  constructor(private postsService: PostsService) { }
+  constructor(private postsService: PostsService,
+    private notificationService: NotificationsService) {
+
+  }
 
   ngOnInit() {
+    let self = this;
     this.postsService.getAllPosts()
       .subscribe(posts => this.posts = posts);
+
+    if (localStorage.getItem('logged-user-id')) {
+      this.loggedIn = "You are logged in!";
+    }
+
   }
 
   addPost() {
     console.log('here');
-    const {content, user_id} = this.post;
+    const { content, user_id } = this.post;
     console.log(user_id);
     this.postsService.addPost(content, user_id);
+  }
+
+  addClass(id) {
+    this.id = id;
   }
 
 }

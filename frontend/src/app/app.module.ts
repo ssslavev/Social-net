@@ -13,6 +13,7 @@ import { HomeComponent } from './components/home/home.component';
 import { PostComponent } from './components/post/post.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { AuthGuard } from './guards/auth.guard';
+import { NotificationsService } from './services/notifications.service';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,7 @@ import { AuthGuard } from './guards/auth.guard';
     AppRoutingModule,
     FormsModule
   ],
-  providers: [AuthGuard],
+  providers: [AuthGuard, NotificationsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

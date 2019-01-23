@@ -7,6 +7,7 @@ require '../src/TokenGenerator.php';
 
 
 
+
 class AuthController {
 
 
@@ -25,7 +26,16 @@ class AuthController {
                         'email'=>$email];
 
          $authData = new AuthData();
-         $authData->add($userToAdd);
+
+        try {
+           $data =   $authData->add($userToAdd);
+           return $response->withjson($data);
+        } catch (Exception $e) {
+            $error = ["message"=> $e->getMessage()];
+            return $response->withJson( $error);
+        }
+
+         
     }
 
     public function login(Request $request, Response $response, array $args) {

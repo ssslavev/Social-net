@@ -20,6 +20,6 @@ a:hover {
 }
 
 .active {
-   color: #53A3CD !important;
+    filter: brightness(70%);
    transform: scale(1.2);
 }

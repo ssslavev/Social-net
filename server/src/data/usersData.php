@@ -56,6 +56,25 @@ class UsersData {
             echo $e->getMessage();
         }
      }
+
+     public function getUserByName($name) {
+
+        $sql = "SELECT name FROM users WHERE name = :name";
+
+        try {
+            $db = new Db();
+            $db = $db->connect();
+    
+            $stmt = $db->prepare($sql);
+            $stmt->bindParam(':name', $name);
+            $stmt->execute();
+            $user = $stmt->fetchAll(PDO::FETCH_OBJ);
+    
+            return $user;    
+        } catch(PDOException $e) {
+            echo $e->getMessage();
+        }
+     }
 }
 
     

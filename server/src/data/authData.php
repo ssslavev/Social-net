@@ -1,12 +1,24 @@
 <?php 
+//require '../src/data/usersData.php';
 
 class AuthData {
 
     public function add($userToAdd) {
         
+        $usersData = new UsersData();
+
         list('name'=> $name, 'password'=> $password, 'firstName'=>$firstName,
         'lastName'=>$lastName, 'email'=>$email) = $userToAdd;
 
+        $user = $usersData->getUserByName($name);
+       
+
+        
+            if ($user) {
+                throw new Exception("Username already exists!");
+                    
+            }
+       
         $sql = "INSERT INTO Users (name, password, first_name, last_name, email) VALUES (:name, :password, :first_name, :last_name, :email)";
 
     try {
@@ -20,9 +32,13 @@ class AuthData {
         $stmt->bindParam(':last_name', $lastName);
         $stmt->bindParam(':email', $email);
 
-        $stmt->execute();
+         $stmt =  $stmt->execute();
+
+         if ($stmt) {
+            return ["message"=>"You are registered"];
+         }
         
-        echo  '{"notice": {"text": "Customer added!"}}';    
+          
     } catch(PDOException $e) {
         echo $e->getMessage();
     }

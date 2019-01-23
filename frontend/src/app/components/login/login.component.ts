@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
+import { NotificationsService } from 'src/app/services/notifications.service';
 
 @Component({
   selector: 'app-login',
@@ -25,8 +26,6 @@ export class LoginComponent implements OnInit {
   login() {
     const { username, password } = this.user;
     this.authService.login(username, password);
-    
-    
   }
 
 }
