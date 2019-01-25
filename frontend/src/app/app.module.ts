@@ -14,6 +14,7 @@ import { PostComponent } from './components/post/post.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { AuthGuard } from './guards/auth.guard';
 import { NotificationsService } from './services/notifications.service';
+import { UserMainComponent } from './components/user-main/user-main.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { NotificationsService } from './services/notifications.service';
     LoginComponent,
     HomeComponent,
     PostComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    UserMainComponent
   ],
   imports: [
     BrowserModule,
