@@ -17,7 +17,8 @@ $app->add(new Tuupola\Middleware\JwtAuthentication([
     "ignore"=>["/api/users/login",
                 "/api/users",
                 "/api/users/register",
-                "/api/posts"        ]
+                "/api/posts",
+                "/api/users/posts/{id}"        ]
 ]));
 
 
@@ -30,6 +31,7 @@ $app->post('/api/posts', '\PostsController:addPost');
 $app->get('/api/posts', '\PostsController:getAllPosts');
 $app->get('/api/posts/{id}', '\PostsController:getPostById'); 
 $app->get('/api/usersandposts', '\UsersController:getUsersWithPosts');
+$app->get('/api/users/posts/{id}', '\PostsController:getPostsByUserId');
 
 
 

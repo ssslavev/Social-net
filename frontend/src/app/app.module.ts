@@ -15,6 +15,9 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { AuthGuard } from './guards/auth.guard';
 import { NotificationsService } from './services/notifications.service';
 import { UserMainComponent } from './components/user-main/user-main.component';
+import { UserInfoComponent } from './components/user-info/user-info.component';
+import { UserFriendsComponent } from './components/user-friends/user-friends.component';
+import { UserPicturesComponent } from './components/user-pictures/user-pictures.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +28,10 @@ import { UserMainComponent } from './components/user-main/user-main.component';
     HomeComponent,
     PostComponent,
     UserProfileComponent,
-    UserMainComponent
+    UserMainComponent,
+    UserInfoComponent,
+    UserFriendsComponent,
+    UserPicturesComponent
   ],
   imports: [
     BrowserModule,

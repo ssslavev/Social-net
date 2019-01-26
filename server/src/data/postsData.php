@@ -67,5 +67,27 @@ class PostsData {
             echo $e->getMessage();
         }
         }
-    }
+
+     public function getPostsByUserId($userId) {
+        
+        $sql = 'SELECT name, content, u.user_id, created_at FROM
+        posts p LEFT JOIN users u
+        ON p.user_id = u.user_id
+        WHERE p.user_id = :id';
+
+        try {
+            $db = new Db();
+            $db = $db->connect();
+
+            $stmt = $db->prepare($sql);
+            $stmt->bindParam(':id', $userId);
+            $stmt->execute();
+            $post = $stmt->fetchAll(PDO::FETCH_OBJ);
+
+            return $post;    
+        } catch(PDOException $e) {
+            echo $e->getMessage();
+        }
+     }   
+}
 

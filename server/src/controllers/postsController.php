@@ -40,4 +40,14 @@ class PostsController {
         return $response->withJson($post);
 
     }
+
+    public function getPostsByUserId(Request $request, Response $response, array $args) {
+        
+        $userId = $request->getAttribute('id');
+
+        $postsData = new PostsData();
+        $posts = $postsData->getPostsByUserId($userId);
+
+        return $response->withJson($posts);
+    }
 }

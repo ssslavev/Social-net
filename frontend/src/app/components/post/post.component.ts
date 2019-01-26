@@ -11,7 +11,8 @@ export class PostComponent implements OnInit {
   @Input() postData = {
     name: '',
     content: '',
-    user_id: ''
+    user_id: '',
+    created_at: ''
   }
 
   constructor(private postsService: PostsService) { }
