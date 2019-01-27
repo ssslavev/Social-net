@@ -1,3 +1,8 @@
 .gedf-card {
     margin-top: 20px;
 }
+
+#created_at {
+    padding-left: 50px;
+    font-size: 14px;
+}

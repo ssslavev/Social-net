@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PostsService } from 'src/app/services/posts.service';
 import { map } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-user-main',
@@ -11,11 +12,13 @@ export class UserMainComponent implements OnInit {
 
   posts;
 
-  userId = +localStorage.getItem('logged-user-id');
+  userId
 
-  constructor(private postsService: PostsService) { }
+  constructor(private postsService: PostsService,
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.route.parent.params.subscribe(params=> this.userId = params.id);
     this.postsService.getPostsByUser(this.userId)
       .pipe(map(posts => {
         return posts.map(post => {
