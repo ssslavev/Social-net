@@ -10,29 +10,32 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class UserMainComponent implements OnInit {
 
-  posts;
+  posts: [];
 
-  userId
+  userId: number;
 
   constructor(private postsService: PostsService,
-              private route: ActivatedRoute) { }
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.route.parent.params.subscribe(params=> this.userId = params.id);
-    this.postsService.getPostsByUser(this.userId)
-      .pipe(map(posts => {
-        return posts.map(post => {
-           return   {
-            name: post.name,
-            created_at : Date.parse(post.created_at),
-            user_id: post.user_id,
-            content: post.content
-          }
-        })
-      }))
-      .subscribe(posts => this.posts = posts,
-        error => console.log(error)
-      );
+    this.route.parent.params.subscribe(params => {
+      this.userId = params.id
+      this.postsService.getPostsByUser(this.userId)
+        .pipe(map(posts => {
+          return posts.map(post => {
+            return {
+              name: post.name,
+              created_at: Date.parse(post.created_at),
+              user_id: post.user_id,
+              content: post.content
+            }
+          })
+        }))
+        .subscribe(posts => this.posts = posts,
+          error => console.log(error)
+        );
+    });
+
   }
 
 }

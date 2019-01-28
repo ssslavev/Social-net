@@ -1,1 +1,26 @@
-<h1>test</h1>
+<div class="container-fluid gedf-wrapper">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <table *ngIf="user" class="table">
+                <tbody>
+                    <tr>
+                        <td>name</td>
+                        <td>{{user[0].name}}</td>
+                    </tr>
+                    <tr>
+                        <td>first name</td>
+                        <td>{{user[0].first_name}}</td>
+                    </tr>
+                    <tr>
+                        <td>last name</td>
+                        <td>{{user[0].last_name}}</td>
+                    </tr>
+                    <tr>
+                        <td>email</td>
+                        <td>{{user[0].email}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

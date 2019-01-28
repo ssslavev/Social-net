@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UsersService } from 'src/app/services/users.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-user-info',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserInfoComponent implements OnInit {
 
-  constructor() { }
+
+  userId;
+  user;
+
+  constructor(private usersService: UsersService,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.route.parent.params.subscribe(params=> this.userId = params.id);
+    this.usersService.getUserById(this.userId)
+      .subscribe(user => this.user = user,
+        error => console.error(error)
+      );
   }
 
 }

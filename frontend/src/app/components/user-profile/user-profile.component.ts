@@ -10,16 +10,22 @@ import { ActivatedRoute } from '@angular/router';
 export class UserProfileComponent implements OnInit {
 
   user;
+  userId;
 
   constructor(private usersService: UsersService,
     private route: ActivatedRoute) { }
 
   ngOnInit() {
-    const id = +this.route.snapshot.paramMap.get('id');
-    this.usersService.getUserById(id)
-      .subscribe(user => { this.user = user },
-        error => console.error(error)
-      );
+    //const id = +this.route.snapshot.paramMap.get('id');
+    this.route.paramMap.subscribe(params => {
+    this.userId = +params.get('id')
+      console.log(this.userId);
+      this.usersService.getUserById(this.userId)
+        .subscribe(user => { this.user = user },
+          error => console.error(error)
+        );
+    });
+
   }
 
 }
