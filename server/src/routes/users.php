@@ -20,7 +20,8 @@ $app->add(new Tuupola\Middleware\JwtAuthentication([
                 "/api/users/register",
                 "/api/posts",
                 "/api/users/posts/{id}" ,
-                "api/users/friends/request"       ]
+                "api/users/friends/request",
+                "api/users/friends/acceptReq"]
 ]));
 
 
@@ -37,6 +38,8 @@ $app->get('/api/users/posts/{id}', '\PostsController:getPostsByUserId');
 $app->post('/api/users/friends/request', '\FriendReqController:sendFriendReq');
 $app->post('/api/users/friends/fromreq', '\FriendReqController:getFromReq');
 $app->post('/api/users/friends/toreq', '\FriendReqController:getToReq');
+$app->post('/api/users/friends/acceptreq', '\FriendReqController:acceptReq');
+$app->post('/api/users/friends', '\FriendReqController:getFriends');
 
 
 

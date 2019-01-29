@@ -66,4 +66,50 @@ class FriendReqData {
             echo $e->getMessage();
         }
     }
+
+    public function acceptReq($loggedUserId, $id) {
+
+        $sql = "INSERT  INTO friends (user_one, user_two) VALUES (:user_one, :user_two)";
+
+        try {
+            $db = new Db();
+            $db = $db->connect();
+    
+            $stmt = $db->prepare($sql);
+            $stmt->bindParam(':user_one', $loggedUserId);
+            $stmt->bindParam(':user_two', $id);
+            $stmt->execute();
+
+
+            
+                
+        } catch(PDOException $e) {
+            echo $e->getMessage();
+        }
+
+    }
+
+    public function getFriends($loggedUserId, $id) {
+
+        $sql = "SELECT friends_id  FROM friends  WHERE user_one =:user_one AND user_two=:user_two
+                OR user_one = :user_two AND user_two = :user_one";
+
+        try {
+            $db = new Db();
+            $db = $db->connect();
+    
+            $stmt = $db->prepare($sql);
+            $stmt->bindParam(':user_one', $loggedUserId);
+            $stmt->bindParam(':user_two', $id);
+            $stmt->execute();
+
+            $friends =  $stmt->fetchAll(PDO::FETCH_OBJ);
+            
+            return $friends;
+                
+        } catch(PDOException $e) {
+            echo $e->getMessage();
+        }
+
+    }
 }

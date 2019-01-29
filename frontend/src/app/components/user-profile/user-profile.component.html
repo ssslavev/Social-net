@@ -27,11 +27,15 @@
         aria-controls="pills-contact">Pictures</a>
     </li>
   </ul>
-  <div *ngIf="user[0]?.user_id!=loggedUserId">
+  <div *ngIf="areFriends?.length">
+      <button type="button"  class="btn btn-primary">You are friends</button>
+      <button type="button"  class="btn btn-danger">Remove friend</button>
+  </div>
+  <div *ngIf="user[0]?.user_id!=loggedUserId && !areFriends?.length">
     <div *ngIf="toReq?.length && !fromReq?.lenght">
       <button type="button" [hidden]="true" class="btn btn-primary" (click)="sendFriendRequest(loggedUserId, userId, loggedUserName)">Send
         friend request</button>
-      <button type="button"  class="btn btn-success">Accept</button>
+      <button type="button" class="btn btn-success" (click)="acceptReq(loggedUserId, userId)">Accept</button>
       <button type="button"  class="btn btn-secondary">Ignore</button>
       <button type="button" *ngIf="fromReq?.lenght" class="btn btn-warning">Cancel</button>
       <button type="button" [hidden]="true" class="btn btn-danger">Remove</button>

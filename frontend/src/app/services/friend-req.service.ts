@@ -24,4 +24,14 @@ export class FriendReqService {
     return this.http.post("http://my-social-net/api/users/friends/toreq", {loggedUserId, id});
   }
 
+  acceptReq(loggedUserId: number, id: number) {
+
+    return this.http.post("http://my-social-net/api/users/friends/acceptreq", {loggedUserId, id});
+  }
+
+  getFriends(loggedUserId: number, id: number) {
+
+    return this.http.post("http://my-social-net/api/users/friends", {loggedUserId, id});
+  }
+
 }

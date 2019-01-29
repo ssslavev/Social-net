@@ -43,4 +43,29 @@ class FriendReqController {
         return $response->withJson($request);
     }
 
+    public function acceptReq(Request $request, Response $response, array $args) {
+
+        $loggedUserId =  intval($request->getParam('loggedUserId'));
+        $id =  intval($request->getParam('id'));
+        
+        $friendReqData = new FriendReqData();
+
+        $friendReqData->acceptReq($loggedUserId, $id);
+
+    }
+
+    public function getFriends(Request $request, Response $response, array $args) {
+
+        $loggedUserId =  intval($request->getParam('loggedUserId'));
+        $id =  intval($request->getParam('id'));
+        
+        $friendReqData = new FriendReqData();
+
+       $friends = $friendReqData->getFriends($loggedUserId, $id);
+
+       return $response->withJson($friends);
+    }   
+
+
+
 }

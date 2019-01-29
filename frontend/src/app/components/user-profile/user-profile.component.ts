@@ -16,6 +16,7 @@ export class UserProfileComponent implements OnInit {
   loggedUserName;
   fromReq;
   toReq;
+  areFriends;
 
   constructor(private usersService: UsersService,
     private route: ActivatedRoute,
@@ -41,7 +42,12 @@ export class UserProfileComponent implements OnInit {
                 .subscribe(res => {
                   this.toReq = res,
                   console.log(res);
-                })
+                });
+              this.reqService.getFriends(this.loggedUserId, this.userId)
+                .subscribe(res=> {
+                  this.areFriends = res,
+                  console.log(res);
+                })  
         },
           error => console.error(error)
         );
@@ -55,6 +61,12 @@ export class UserProfileComponent implements OnInit {
     this.reqService.sendFriendRequest(loggedUseId, id, loggedUserName)
       .subscribe(res => console.log(res),
         error => console.log(error));
+  }
+
+  acceptReq(loggedUserId, id) {
+    this.reqService.acceptReq(loggedUserId, id)
+      .subscribe(res=> console.log(res),
+        error=> console.log(error));
   }
 
 }
