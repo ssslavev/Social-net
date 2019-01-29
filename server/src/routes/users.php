@@ -5,6 +5,7 @@ use \Psr\Http\Message\ResponseInterface as Response;
 require_once '../src/controllers/auth.php';
 require_once '../src/controllers/usersController.php';
 require_once '../src/controllers/postsController.php';
+require_once '../src/controllers/friendReqController.php';
 
 
 $container = new \Slim\Container;
@@ -18,7 +19,8 @@ $app->add(new Tuupola\Middleware\JwtAuthentication([
                 "/api/users",
                 "/api/users/register",
                 "/api/posts",
-                "/api/users/posts/{id}"        ]
+                "/api/users/posts/{id}" ,
+                "api/users/friends/request"       ]
 ]));
 
 
@@ -32,6 +34,7 @@ $app->get('/api/posts', '\PostsController:getAllPosts');
 $app->get('/api/posts/{id}', '\PostsController:getPostById'); 
 $app->get('/api/usersandposts', '\UsersController:getUsersWithPosts');
 $app->get('/api/users/posts/{id}', '\PostsController:getPostsByUserId');
+$app->post('/api/users/friends/request', '\FriendReqController:sendFriendReq');
 
 
 
@@ -48,6 +51,11 @@ $container['UsersController'] = function() {
 $container = $app->getContainer();
 $container['postsController'] = function() {
     return new postsController();
+};
+
+$container = $app->getContainer();
+$container['friendReqController'] = function() {
+    return new friendReqController();
 };
 
 
