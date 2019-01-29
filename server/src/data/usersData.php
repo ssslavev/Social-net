@@ -21,7 +21,7 @@ class UsersData {
 
     public function getUserById($id) {
 
-        $sql = "SELECT name, first_name, last_name, email FROM users WHERE user_id = :id";
+        $sql = "SELECT name, first_name, last_name, email, user_id FROM users WHERE user_id = :id";
 
         try {
             $db = new Db();

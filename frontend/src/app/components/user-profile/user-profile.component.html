@@ -1,4 +1,4 @@
-<div class="col-md-8 offset-md-2">
+<div *ngIf="user" class="col-md-8 offset-md-2">
   <div class="card hovercard">
     <div class="card-background">
       <img class="card-bkimg" alt="" width="900" height="300" src="https://russianbet.ru/wp-content/uploads/2018/06/1.jpg">
@@ -7,7 +7,7 @@
     <div class="useravatar">
       <img alt="" src="https://cdn.onlinewebfonts.com/svg/img_258083.png">
     </div>
-    <div *ngIf="user" class="card-info"> <span class="card-title">{{user[0].name}}</span>
+    <div class="card-info"> <span class="card-title">{{user[0].name}} {{user[0].user_id}}</span>
     </div>
   </div>
   <ul class="nav nav-pills mb-3 nav-justified" id="pills-tab" role="tablist">
@@ -15,14 +15,46 @@
       <a class="nav-link" routerLinkActive="active" routerLink='main' id="pills-main-tab" role="tab" aria-controls="pills-home">Main</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" routerLinkActive="active" routerLink='information' id="pills-information-tab" role="tab" aria-controls="pills-profile">Information</a>
+      <a class="nav-link" routerLinkActive="active" routerLink='information' id="pills-information-tab" role="tab"
+        aria-controls="pills-profile">Information</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" routerLinkActive="active" routerLink='friends' id="pills-friends-tab" role="tab" aria-controls="pills-contact">Friends</a>
+      <a class="nav-link" routerLinkActive="active" routerLink='friends' id="pills-friends-tab" role="tab"
+        aria-controls="pills-contact">Friends</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" routerLinkActive="active" routerLink='pictures' id="pills-pictures-tab" role="tab" aria-controls="pills-contact">Pictures</a>
+      <a class="nav-link" routerLinkActive="active" routerLink='pictures' id="pills-pictures-tab" role="tab"
+        aria-controls="pills-contact">Pictures</a>
     </li>
   </ul>
+  <div *ngIf="user[0]?.user_id!=loggedUserId">
+    <div *ngIf="toReq?.length && !fromReq?.lenght">
+      <button type="button" [hidden]="true" class="btn btn-primary" (click)="sendFriendRequest(loggedUserId, userId, loggedUserName)">Send
+        friend request</button>
+      <button type="button"  class="btn btn-success">Accept</button>
+      <button type="button"  class="btn btn-secondary">Ignore</button>
+      <button type="button" *ngIf="fromReq?.lenght" class="btn btn-warning">Cancel</button>
+      <button type="button" [hidden]="true" class="btn btn-danger">Remove</button>
+    </div>
+    <div *ngIf="fromReq?.length && !toReq?.length">
+        <button type="button" [hidden]="true" class="btn btn-primary" (click)="sendFriendRequest(loggedUserId, userId, loggedUserName)">Send
+          friend request</button>
+        <button type="button" [hidden]="true" class="btn btn-success">Accept</button>
+        <button type="button" [hidden]="true" class="btn btn-secondary">Ignore</button>
+        <button type="button" class="btn btn-warning">Cancel</button>
+        <button type="button" [hidden]="true" class="btn btn-danger">Remove</button>
+      </div>
+      <div *ngIf="!fromReq?.length && !toReq?.length">
+          <button type="button"  class="btn btn-primary" (click)="sendFriendRequest(loggedUserId, userId, loggedUserName)">Send
+            friend request</button>
+          <button type="button" [hidden]="true" class="btn btn-success">Accept</button>
+          <button type="button" [hidden]="true" class="btn btn-secondary">Ignore</button>
+          <button type="button" [hidden]="true" class="btn btn-warning">Cancel</button>
+          <button type="button" [hidden]="true" class="btn btn-danger">Remove</button>
+        </div>
+  </div>
+
+
+
   <router-outlet></router-outlet>
 </div>

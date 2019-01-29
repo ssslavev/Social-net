@@ -19,4 +19,28 @@ class FriendReqController {
 
     }
 
+    public function getFromReq(Request $request, Response $response, array $args) {
+
+        $loggedUserId =  intval($request->getParam('loggedUserId'));
+        $id =  intval($request->getParam('id'));
+
+        $friendReqData = new FriendReqData();
+
+         $request = $friendReqData->getFromReq($loggedUserId, $id);
+
+        return $response->withJson($request);
+    }
+
+    public function getToReq(Request $request, Response $response, array $args) {
+
+        $loggedUserId =  intval($request->getParam('loggedUserId'));
+        $id =  intval($request->getParam('id'));
+
+        $friendReqData = new FriendReqData();
+
+         $request = $friendReqData->getFromReq($loggedUserId, $id);
+
+        return $response->withJson($request);
+    }
+
 }

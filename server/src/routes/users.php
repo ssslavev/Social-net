@@ -35,6 +35,8 @@ $app->get('/api/posts/{id}', '\PostsController:getPostById');
 $app->get('/api/usersandposts', '\UsersController:getUsersWithPosts');
 $app->get('/api/users/posts/{id}', '\PostsController:getPostsByUserId');
 $app->post('/api/users/friends/request', '\FriendReqController:sendFriendReq');
+$app->post('/api/users/friends/fromreq', '\FriendReqController:getFromReq');
+$app->post('/api/users/friends/toreq', '\FriendReqController:getToReq');
 
 
 
