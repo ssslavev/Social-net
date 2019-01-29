@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UsersService } from 'src/app/services/users.service';
 import { ActivatedRoute } from '@angular/router';
 import { FriendReqService } from 'src/app/services/friend-req.service';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-user-profile',
@@ -24,30 +25,25 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit() {
 
-    //const id = +this.route.snapshot.paramMap.get('id');
     this.loggedUserId = localStorage.getItem('logged-user-id');
     this.loggedUserName = localStorage.getItem('logged-user-name');
     this.route.paramMap.subscribe(params => {
       this.userId = +params.get('id')
-      //console.log(this.userId);
+
       this.usersService.getUserById(this.userId)
         .subscribe(user => {
           this.user = user,
-            this.reqService.getFromReq(this.loggedUserId, this.userId)
-              .subscribe(res => {
-              this.fromReq = res,
-                console.log(res)
-              });
-              this.reqService.getToReq(this.userId ,this.loggedUserId)
-                .subscribe(res => {
-                  this.toReq = res,
-                  console.log(res);
-                });
+
+            forkJoin(
+              this.reqService.getFromReq(this.loggedUserId, this.userId),
+              this.reqService.getToReq(this.userId, this.loggedUserId),
               this.reqService.getFriends(this.loggedUserId, this.userId)
-                .subscribe(res=> {
-                  this.areFriends = res,
-                  console.log(res);
-                })  
+            )
+              .subscribe(([fromReq, toReq, friends]) => {
+                this.fromReq = fromReq,
+                  this.toReq = toReq,
+                  this.areFriends = friends
+              })
         },
           error => console.error(error)
         );
@@ -65,8 +61,8 @@ export class UserProfileComponent implements OnInit {
 
   acceptReq(loggedUserId, id) {
     this.reqService.acceptReq(loggedUserId, id)
-      .subscribe(res=> console.log(res),
-        error=> console.log(error));
+      .subscribe(res => console.log(res),
+        error => console.log(error));
   }
 
 }
