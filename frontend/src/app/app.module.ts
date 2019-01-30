@@ -3,6 +3,9 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {ToastModule} from 'primeng/toast';
+import {MessageService} from 'primeng/api';
 
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
@@ -38,9 +41,11 @@ import { UserPicturesComponent } from './components/user-pictures/user-pictures.
     HttpClientModule,
     NgbModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
+    ToastModule
   ],
-  providers: [AuthGuard, NotificationsService],
+  providers: [AuthGuard, NotificationsService, MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

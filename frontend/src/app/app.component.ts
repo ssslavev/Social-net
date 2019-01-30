@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NotificationsService } from './services/notifications.service';
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -14,7 +15,7 @@ export class AppComponent implements OnInit {
   id: number;
 
 
-  constructor(private notificationService: NotificationsService) {
+  constructor(private notificationService: NotificationsService ) {
     this.notificationService.emitChange.subscribe(
       message => {
         if (message == 'Username already exists!') {
@@ -27,6 +28,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    
   }
 
   addClass(id) {

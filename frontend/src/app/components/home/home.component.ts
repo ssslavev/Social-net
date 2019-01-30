@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PostsService } from 'src/app/services/posts.service';
 import { NotificationsService } from 'src/app/services/notifications.service';
+import {MessageService} from 'primeng/api';
 
 @Component({
   selector: 'app-home',
@@ -22,7 +23,8 @@ export class HomeComponent implements OnInit {
 
 
   constructor(private postsService: PostsService,
-    private notificationService: NotificationsService) {
+    private notificationService: NotificationsService,
+    private messageService: MessageService) {
 
   }
 
@@ -34,7 +36,11 @@ export class HomeComponent implements OnInit {
     if (localStorage.getItem('logged-user-id')) {
       this.loggedIn = "You are logged in!";
     }
+   
+  }
 
+  showSuccess() {
+    this.messageService.add({severity:'success', summary:'Service Message', detail:'Via MessageService'});
   }
 
   addPost() {
