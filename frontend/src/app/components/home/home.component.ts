@@ -1,7 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PostsService } from 'src/app/services/posts.service';
 import { NotificationsService } from 'src/app/services/notifications.service';
-import {MessageService} from 'primeng/api';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-home',
@@ -9,7 +9,7 @@ import {MessageService} from 'primeng/api';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
- 
+
 
   posts;
   loggedIn;
@@ -29,19 +29,17 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    let self = this;
+  
+    
     this.postsService.getAllPosts()
       .subscribe(posts => this.posts = posts);
 
     if (localStorage.getItem('logged-user-id')) {
       this.loggedIn = "You are logged in!";
     }
-   
+
   }
 
-  showSuccess() {
-    this.messageService.add({severity:'success', summary:'Service Message', detail:'Via MessageService'});
-  }
 
   addPost() {
     console.log('here');
@@ -53,5 +51,7 @@ export class HomeComponent implements OnInit {
   addClass(id) {
     this.id = id;
   }
+
+ 
 
 }

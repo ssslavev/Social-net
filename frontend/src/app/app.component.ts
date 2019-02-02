@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NotificationsService } from './services/notifications.service';
+import { MessageService } from 'primeng/api';
 
 
 @Component({
@@ -15,7 +16,8 @@ export class AppComponent implements OnInit {
   id: number;
 
 
-  constructor(private notificationService: NotificationsService ) {
+  constructor(private notificationService: NotificationsService,
+    private messageService: MessageService) {
     this.notificationService.emitChange.subscribe(
       message => {
         if (message == 'Username already exists!') {
@@ -27,11 +29,15 @@ export class AppComponent implements OnInit {
     );
   }
 
-  ngOnInit(): void {
-    
+  ngOnInit() {
+   
   }
+
+ 
 
   addClass(id) {
     this.id = id;
   }
+
+ 
 }
