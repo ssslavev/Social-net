@@ -36,7 +36,7 @@ export class AuthService {
   }
 
   login(name: string, password: string) {
-
+    this.notificationService.emitSpiner(true);
     return this.http.post('http://my-social-net/api/users/login', { name, password })
       .subscribe(user => {
         localStorage.setItem('token', user['token']);
@@ -45,18 +45,19 @@ export class AuthService {
         localStorage.setItem("loggedin", "true");
         this.router.navigate(['/home']).then(() => {
           //location.reload(true);
-            //this.messageService.add({summary: "You are logged in!"}); 
-          
+          //this.messageService.add({summary: "You are logged in!"}); 
+
         });
-        
+
         this.notificationService.emit("You are logged in!");
         //this.loggedIn.next(true);
         //this.user.next(localStorage.getItem('logged-user-name'));
         this.notificationService.emitUserName(localStorage.getItem('logged-user-name'));
         this.notificationService.emitUserId(localStorage.getItem('logged-user-id'));
-        this.messageService.add({severity:'success', summary: "You are logged in!"});
+        this.messageService.add({ severity: 'success', summary: "You are logged in!" });
       },
-        error => this.handleError);
+        error => this.handleError,
+        () => this.notificationService.emitSpiner(false));
 
   }
 

@@ -224,4 +224,15 @@
     border-color: #1CA347;
 }
 
-
+.ui-progress-spinner {
+    position: fixed !important;
+    z-index: 999;
+    height: 200px !important;
+    width: 200px !important;
+    overflow: visible;
+    margin: auto;
+    top: 40%;
+    left: 0;
+    bottom: 0;
+    right: 0;
+  }

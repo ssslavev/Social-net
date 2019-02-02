@@ -8,6 +8,7 @@ export class NotificationsService {
   emitChange$: Subject<any> = new BehaviorSubject<any>(null);
   username: Subject<any> = new BehaviorSubject<any>(null);
   userId: Subject<any> = new BehaviorSubject<any>(null);
+  spiner: Subject<any> = new BehaviorSubject<any>(null);
 
   constructor() { }
 
@@ -22,6 +23,14 @@ export class NotificationsService {
   emitUserName(value:any) {
     this.username.next(value);
   }
+
+  emitSpiner(value: any) {
+    this.spiner.next(value);
+  }
+
+ get getSpinerChange(): BehaviorSubject<any> {
+   return (this.spiner as BehaviorSubject<any>);
+ } 
 
   get emitUserNameChange() :BehaviorSubject<any> {
     return (this.username as BehaviorSubject<any>);

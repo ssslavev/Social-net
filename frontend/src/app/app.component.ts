@@ -3,6 +3,7 @@ import { NotificationsService } from './services/notifications.service';
 import { MessageService } from 'primeng/api';
 
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -14,10 +15,10 @@ export class AppComponent implements OnInit {
   success;
   loggedIn;
   id: number;
+  loading;
 
 
-  constructor(private notificationService: NotificationsService,
-    private messageService: MessageService) {
+  constructor(private notificationService: NotificationsService) {
     this.notificationService.emitChange.subscribe(
       message => {
         if (message == 'Username already exists!') {
@@ -30,7 +31,10 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-   
+      this.notificationService.getSpinerChange.subscribe(loading => {
+        this.loading = loading;
+        console.log(loading);
+      })
   }
 
  
