@@ -3,6 +3,7 @@ import { UsersService } from 'src/app/services/users.service';
 import { ActivatedRoute } from '@angular/router';
 import { FriendReqService } from 'src/app/services/friend-req.service';
 import { forkJoin } from 'rxjs';
+import {MenuItem} from 'primeng/api'
 
 @Component({
   selector: 'app-user-profile',
@@ -18,12 +19,21 @@ export class UserProfileComponent implements OnInit {
   fromReq;
   toReq;
   areFriends;
+  items: MenuItem[];
 
   constructor(private usersService: UsersService,
     private route: ActivatedRoute,
     private reqService: FriendReqService) { }
 
   ngOnInit() {
+
+    this.items = [
+      {label: 'Main', icon: '../../../assets/sharp_person_pin_white_18dp.png', routerLink: 'main'},
+      {label: 'Information', icon: '../../../assets/images/sharp_info_white_18dp.png', routerLink: 'information'},
+      {label: 'Friends', icon: '../../../assets/images/sharp_people_white_18dp.png', routerLink: 'friends'},
+      {label: 'Pictures', icon: '../../../assets/images/sharp_image_white_18dp.png', routerLink: 'pictures'},
+      
+  ];
 
     this.loggedUserId = localStorage.getItem('logged-user-id');
     this.loggedUserName = localStorage.getItem('logged-user-name');

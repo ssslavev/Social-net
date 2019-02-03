@@ -17,8 +17,6 @@ export class PostsService {
 
   addPost(content: string, user_id: number) {
     return this.http.post('http://my-social-net/api/posts', {content, user_id})
-    .subscribe(res=>console.log(res),
-    error=>console.log(error));
   }
 
   getPostsByUser(userId: number): Observable<any> {

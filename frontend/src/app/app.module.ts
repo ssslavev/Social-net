@@ -7,6 +7,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ToastModule} from 'primeng/toast';
 import {MessageService} from 'primeng/api';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
+import {TabMenuModule} from 'primeng/tabmenu';
 
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
@@ -45,7 +46,8 @@ import { UserPicturesComponent } from './components/user-pictures/user-pictures.
     FormsModule,
     BrowserAnimationsModule,
     ToastModule
-    ,ProgressSpinnerModule
+    ,ProgressSpinnerModule,
+    TabMenuModule
   ],
   providers: [AuthGuard, NotificationsService, MessageService],
   bootstrap: [AppComponent]

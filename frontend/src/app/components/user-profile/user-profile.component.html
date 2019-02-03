@@ -10,52 +10,46 @@
     <div class="card-info"> <span class="card-title">{{user[0].name}} {{user[0].user_id}}</span>
     </div>
   </div>
-  <ul class="nav nav-pills mb-3 nav-justified" id="pills-tab" role="tablist">
-    <li class="nav-item">
-      <a class="nav-link" routerLinkActive="active" routerLink='main' id="pills-main-tab" role="tab" aria-controls="pills-home">Main</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" routerLinkActive="active" routerLink='information' id="pills-information-tab" role="tab"
-        aria-controls="pills-profile">Information</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" routerLinkActive="active" routerLink='friends' id="pills-friends-tab" role="tab"
-        aria-controls="pills-contact">Friends</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" routerLinkActive="active" routerLink='pictures' id="pills-pictures-tab" role="tab"
-        aria-controls="pills-contact">Pictures</a>
-    </li>
-  </ul>
+  <p-tabMenu [model]="items" [activeItem]="activeItem">
+    <ng-template pTemplate="item" let-item let-i="index">
+      <div style="position: relative; text-align: center; min-width: 10em">
+        <div class="ui-menuitem-icon" [ngClass]="item.icon" *ngIf="item.icon" style="font-size: 2em"><img [src]="item.icon"
+            alt=""></div>
+        <div class="ui-menuitem-text">
+          {{item.label}}
+        </div>
+      </div>
+    </ng-template>
+  </p-tabMenu>
   <div *ngIf="areFriends?.length">
-      <button type="button"  class="btn btn-primary">You are friends</button>
-      <button type="button"  class="btn btn-danger">Remove friend</button>
+    <button type="button" class="btn btn-primary">You are friends</button>
+    <button type="button" class="btn btn-danger">Remove friend</button>
   </div>
   <div *ngIf="user[0]?.user_id!=loggedUserId && !areFriends?.length">
     <div *ngIf="toReq?.length && !fromReq?.lenght">
       <button type="button" [hidden]="true" class="btn btn-primary" (click)="sendFriendRequest(loggedUserId, userId, loggedUserName)">Send
         friend request</button>
       <button type="button" class="btn btn-success" (click)="acceptReq(loggedUserId, userId)">Accept</button>
-      <button type="button"  class="btn btn-secondary">Ignore</button>
+      <button type="button" class="btn btn-secondary">Ignore</button>
       <button type="button" *ngIf="fromReq?.lenght" class="btn btn-warning">Cancel</button>
       <button type="button" [hidden]="true" class="btn btn-danger">Remove</button>
     </div>
     <div *ngIf="fromReq?.length && !toReq?.length">
-        <button type="button" [hidden]="true" class="btn btn-primary" (click)="sendFriendRequest(loggedUserId, userId, loggedUserName)">Send
-          friend request</button>
-        <button type="button" [hidden]="true" class="btn btn-success">Accept</button>
-        <button type="button" [hidden]="true" class="btn btn-secondary">Ignore</button>
-        <button type="button" class="btn btn-warning">Cancel</button>
-        <button type="button" [hidden]="true" class="btn btn-danger">Remove</button>
-      </div>
-      <div *ngIf="!fromReq?.length && !toReq?.length">
-          <button type="button"  class="btn btn-primary" (click)="sendFriendRequest(loggedUserId, userId, loggedUserName)">Send
-            friend request</button>
-          <button type="button" [hidden]="true" class="btn btn-success">Accept</button>
-          <button type="button" [hidden]="true" class="btn btn-secondary">Ignore</button>
-          <button type="button" [hidden]="true" class="btn btn-warning">Cancel</button>
-          <button type="button" [hidden]="true" class="btn btn-danger">Remove</button>
-        </div>
+      <button type="button" [hidden]="true" class="btn btn-primary" (click)="sendFriendRequest(loggedUserId, userId, loggedUserName)">Send
+        friend request</button>
+      <button type="button" [hidden]="true" class="btn btn-success">Accept</button>
+      <button type="button" [hidden]="true" class="btn btn-secondary">Ignore</button>
+      <button type="button" class="btn btn-warning">Cancel</button>
+      <button type="button" [hidden]="true" class="btn btn-danger">Remove</button>
+    </div>
+    <div *ngIf="!fromReq?.length && !toReq?.length">
+      <button type="button" class="btn btn-primary" (click)="sendFriendRequest(loggedUserId, userId, loggedUserName)">Send
+        friend request</button>
+      <button type="button" [hidden]="true" class="btn btn-success">Accept</button>
+      <button type="button" [hidden]="true" class="btn btn-secondary">Ignore</button>
+      <button type="button" [hidden]="true" class="btn btn-warning">Cancel</button>
+      <button type="button" [hidden]="true" class="btn btn-danger">Remove</button>
+    </div>
   </div>
 
 
