@@ -1,3 +1,23 @@
-<p>
-  user-pictures works!
-</p>
+<p-toast [style]="{marginTop: '80px'}"></p-toast>
+
+<h3 class="first">Upload your pictures</h3>
+<p-fileUpload name="demo[]" url="./upload.php" (onUpload)="onUpload($event)" multiple="multiple" accept="image/*"
+  maxFileSize="1000000">
+  <ng-template pTemplate="content">
+    <ul *ngIf="uploadedFiles.length">
+      <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+    </ul>
+  </ng-template>
+</p-fileUpload>
+
+<div class="container">
+  <h1 class="my-4 text-center text-lg-left">Thumbnail Gallery</h1>
+  <div class="row text-center text-lg-left">
+    <div *ngFor="let image of images" class="col-lg-3 col-md-3 col-xs-6">
+      <a href="#" class="d-block mb-4 h-100">
+        <img  class="img-fluid img-thumbnail"  [src]="'data:image/jpeg;base64,'+image.image_data" alt="">
+      </a>
+    </div>
+  </div>
+</div>
+

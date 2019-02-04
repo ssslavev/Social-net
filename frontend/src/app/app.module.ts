@@ -8,6 +8,7 @@ import {ToastModule} from 'primeng/toast';
 import {MessageService} from 'primeng/api';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
 import {TabMenuModule} from 'primeng/tabmenu';
+import {FileUploadModule} from 'primeng/fileupload';
 
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
@@ -47,7 +48,8 @@ import { UserPicturesComponent } from './components/user-pictures/user-pictures.
     BrowserAnimationsModule,
     ToastModule
     ,ProgressSpinnerModule,
-    TabMenuModule
+    TabMenuModule,
+    FileUploadModule
   ],
   providers: [AuthGuard, NotificationsService, MessageService],
   bootstrap: [AppComponent]
