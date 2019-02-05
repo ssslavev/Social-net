@@ -2,9 +2,9 @@
 
 class ImagesData {
 
-    public function uploadImage($image_dir, $image_data) {
+    public function uploadImage($image_dir, $image_data, $user_id) {
         var_dump($image_data."tets");
-        $sql = "INSERT  INTO images (image_dir, image_data) VALUES (:image_dir, :image_data)";
+        $sql = "INSERT  INTO images (image_dir, image_data, user_id) VALUES (:image_dir, :image_data, :user_id)";
 
         try {
             $db = new Db();
@@ -13,6 +13,7 @@ class ImagesData {
             $stmt = $db->prepare($sql);
             $stmt->bindParam(':image_dir', $image_dir);
             $stmt->bindParam(':image_data', $image_data);
+            $stmt->bindParam(':user_id', $user_id);
     
             $stmt->execute();
             

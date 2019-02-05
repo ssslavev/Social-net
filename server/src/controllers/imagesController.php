@@ -16,8 +16,9 @@ class ImagesController {
     public function uploadImage(Request $request, Response $response, array $args) {
         
                 
-
+        $user_id = +$args['id'];
         $image = $request->getUploadedFiles();
+        
         $uploadedImage = $image['image'];
         $extension = pathinfo($uploadedImage->getClientFilename(), PATHINFO_EXTENSION);
         $newFileName = uniqid('', true).".".$extension;
@@ -29,14 +30,14 @@ class ImagesController {
         
         $tmp_dir = $uploadedImage->file;
 
-         $image_data = base64_encode(file_get_contents($tmp_dir)) ;
+        $image_data = base64_encode(file_get_contents($tmp_dir)) ;
          
         
         move_uploaded_file($tmp_dir, $uploadDir);
          
         }
         $imageData = new ImagesData();
-        $imageData->uploadImage($img_dir, $image_data);
+        $imageData->uploadImage($img_dir, $image_data, $user_id);
     }
 
     public function getAllImages(Request $request, Response $response, array $args) {

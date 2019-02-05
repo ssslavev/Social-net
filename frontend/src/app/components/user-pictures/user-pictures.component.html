@@ -1,15 +1,7 @@
 <p-toast [style]="{marginTop: '80px'}"></p-toast>
 
-<h3 class="first">Upload your pictures</h3>
-<p-fileUpload name="demo[]" url="./upload.php" (onUpload)="onUpload($event)" multiple="multiple" accept="image/*"
-  maxFileSize="1000000">
-  <ng-template pTemplate="content">
-    <ul *ngIf="uploadedFiles.length">
-      <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
-    </ul>
-  </ng-template>
-</p-fileUpload>
-
+<input type="file" name="image" (change)="onFileSelect($event)" id="image">
+<button type="button"  (click)="uploadFile()">Upload</button>
 <div class="container">
   <h1 class="my-4 text-center text-lg-left">Thumbnail Gallery</h1>
   <div class="row text-center text-lg-left">
