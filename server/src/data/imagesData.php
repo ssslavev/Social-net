@@ -23,15 +23,18 @@ class ImagesData {
         }
     }
 
-    public function getAllImages() {
+    public function getImagesByUserId($user_id) {
 
-        $sql = "SELECT  image_data FROM images";
+        $sql =' SELECT  image_data, image_id, user_id FROM images
+        WHERE user_id = :id';
 
         try {
             $db = new Db();
             $db = $db->connect();
     
-            $stmt = $db->query($sql);
+            $stmt = $db->prepare($sql);
+            $stmt->bindParam(':id', $user_id);
+            $stmt->execute();
             $images = $stmt->fetchAll(PDO::FETCH_ASSOC);
             //var_dump($images);
             $result = array();

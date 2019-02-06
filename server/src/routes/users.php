@@ -44,7 +44,7 @@ $app->post('/api/users/friends/toreq', '\FriendReqController:getToReq');
 $app->post('/api/users/friends/acceptreq', '\FriendReqController:acceptReq');
 $app->post('/api/users/friends', '\FriendReqController:getFriends');
 $app->post('/api/users/{id}/pictures', '\ImagesController:uploadImage' );
-$app->get('/api/images', '\ImagesController:getAllImages');
+$app->get('/api/users/{id}/images', '\ImagesController:getImagesByuserId');
 
 
 

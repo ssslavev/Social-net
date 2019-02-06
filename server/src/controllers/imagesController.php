@@ -40,14 +40,14 @@ class ImagesController {
         $imageData->uploadImage($img_dir, $image_data, $user_id);
     }
 
-    public function getAllImages(Request $request, Response $response, array $args) {
+    public function getImagesByuserId(Request $request, Response $response, array $args) {
+        
+        $user_id = +$args['id'];
+        
         $imageData = new ImagesData();
-        $images_data = $imageData->getAllImages();
+        $images_data = $imageData->getImagesByUserId($user_id);
 
-        //var_dump($images_data);
-
-       // $images_data = json_encode($images_data, JSON_UNESCAPED_SLASHES);
-    //var_dump($images_data);
-   return $response->getBody()->write(json_encode($images_data,  JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES)); 
+        
+        return $response->getBody()->write(json_encode($images_data,  JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES)); 
     }
 }
