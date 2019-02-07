@@ -25,7 +25,7 @@ class ImagesController {
        
         $uploadDir = dirname(getcwd(), 1)."\\uploads\\".$newFileName;
         $img_dir = 'uploads/'.$newFileName;
-        echo $img_dir;
+        
         if ($uploadedImage->getError()=== UPLOAD_ERR_OK) {
         
         $tmp_dir = $uploadedImage->file;

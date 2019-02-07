@@ -12,9 +12,9 @@ export class ImagesService {
     return this.http.post(`http://my-social-net/api/users/${userId}/pictures`, image);
   }
 
-  getAllImages() {
+  getImagesByUserId(userId) {
 
-    return this.http.get('http://my-social-net/api/images');
+    return this.http.get(`http://my-social-net/api/users/${userId}/images`);
 
   }
 }

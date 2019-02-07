@@ -242,3 +242,9 @@
   .ui-tabmenu {
       margin-top: 30px;
   }
+
+  *:focus {
+    outline: 0 !important;
+}
+
+button:focus {outline:0;}

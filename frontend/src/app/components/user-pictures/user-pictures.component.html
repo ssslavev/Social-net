@@ -1,15 +1,25 @@
 <p-toast [style]="{marginTop: '80px'}"></p-toast>
-
-<input type="file" name="image" (change)="onFileSelect($event)" id="image">
-<button type="button"  (click)="uploadFile()">Upload</button>
 <div class="container">
-  <h1 class="my-4 text-center text-lg-left">Thumbnail Gallery</h1>
+  <div class="row row-centered">
+    <div class="col-md-6 mx-auto">
+      <div id="image-upload" class="input-group">
+        <div class="custom-file">
+          <input type="file" accept="image/*" maxFileSize="10000000000" class="custom-file-input" (change)="onFileSelect($event)" id="inputGroupFile04"
+            aria-describedby="inputGroupFileAddon04">
+          <label class="custom-file-label" for="inputGroupFile04">Choose file</label>
+        </div>
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary" [disabled]="isDisabled" type="button" (click)="uploadFile()" id="inputGroupFileAddon04">Upload</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <h1 class="my-4 text-center text-lg-left">Gallery</h1>
   <div class="row text-center text-lg-left">
     <div *ngFor="let image of images" class="col-lg-3 col-md-3 col-xs-6">
       <a href="#" class="d-block mb-4 h-100">
-        <img  class="img-fluid img-thumbnail"  [src]="'data:image/jpeg;base64,'+image.image_data" alt="">
+        <img class="img-fluid img-thumbnail" [src]="'data:image/jpeg;base64,'+image.image_data" alt="">
       </a>
     </div>
   </div>
 </div>
-

@@ -3,7 +3,7 @@
 class ImagesData {
 
     public function uploadImage($image_dir, $image_data, $user_id) {
-        var_dump($image_data."tets");
+
         $sql = "INSERT  INTO images (image_dir, image_data, user_id) VALUES (:image_dir, :image_data, :user_id)";
 
         try {
@@ -14,7 +14,7 @@ class ImagesData {
             $stmt->bindParam(':image_dir', $image_dir);
             $stmt->bindParam(':image_data', $image_data);
             $stmt->bindParam(':user_id', $user_id);
-    
+            
             $stmt->execute();
             
                 
@@ -26,7 +26,7 @@ class ImagesData {
     public function getImagesByUserId($user_id) {
 
         $sql =' SELECT  image_data, image_id, user_id FROM images
-        WHERE user_id = :id';
+        WHERE user_id = :id ORDER BY image_id DESC';
 
         try {
             $db = new Db();

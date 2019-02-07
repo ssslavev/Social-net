@@ -11,3 +11,11 @@
     object-position: top; /* Set logo position */
         -o-object-position: top; /* Logo position for opera browser */
  }
+
+ #image-upload {
+     margin-top: 30px;
+ }
+
+ #inputGroupFileAddon04 {
+    outline:none; 
+ }
