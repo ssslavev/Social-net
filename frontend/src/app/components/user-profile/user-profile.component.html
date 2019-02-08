@@ -21,7 +21,7 @@
       </div>
     </ng-template>
   </p-tabMenu>
-  <div class="friends-buttons">
+  <div *ngIf="(loggedUserId!=userId)" class="friends-buttons">
     <div *ngIf="areFriends?.length">
       <button type="button" class="btn btn-primary">You are friends</button>
       <button type="button" class="btn btn-danger">Remove friend</button>

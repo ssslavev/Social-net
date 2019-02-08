@@ -12,6 +12,7 @@
           <button class="btn btn-outline-secondary" [disabled]="isDisabled" type="button" (click)="uploadFile()" id="inputGroupFileAddon04">Upload</button>
         </div>
       </div>
+      <img *ngIf="imageSrc"  [src]= imageSrc alt="" srcset="">
     </div>
   </div>
   <h1 class="my-4 text-center text-lg-left">Gallery</h1>

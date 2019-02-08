@@ -17,6 +17,7 @@ export class UserPicturesComponent implements OnInit {
   isDisabled = true;
   userId;
   imagesSubscription;
+  imageSrc;
 
   ngOnInit(): void {
 
@@ -37,7 +38,12 @@ export class UserPicturesComponent implements OnInit {
   onFileSelect(event) {
     this.selectedFile = <File>event.target.files[0];
     this.isDisabled = false;
-
+    let fr = new FileReader();
+     fr.readAsDataURL(this.selectedFile);
+     fr.onload = (_event) => {
+       console.log(fr.result) 
+      this.imageSrc = fr.result ; 
+    }
 
   }
 
@@ -45,6 +51,7 @@ export class UserPicturesComponent implements OnInit {
     console.log('here');
     this.fd = new FormData();
     this.fd.append('image', this.selectedFile, this.selectedFile.name);
+    
     this.imagesService.addImage(localStorage.getItem('logged-user-id'), this.fd)
       .subscribe(() => { console.log("image is uploaded")
                          this.refreshData();},
