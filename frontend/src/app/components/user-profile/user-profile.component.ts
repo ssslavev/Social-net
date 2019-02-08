@@ -20,6 +20,7 @@ export class UserProfileComponent implements OnInit {
   toReq;
   areFriends;
   items: MenuItem[];
+  requests;
 
   constructor(private usersService: UsersService,
     private route: ActivatedRoute,
@@ -39,6 +40,8 @@ export class UserProfileComponent implements OnInit {
     this.loggedUserName = localStorage.getItem('logged-user-name');
     this.route.paramMap.subscribe(params => {
       this.userId = +params.get('id')
+
+      
 
       this.usersService.getUserById(this.userId)
         .subscribe(user => {
@@ -74,5 +77,7 @@ export class UserProfileComponent implements OnInit {
       .subscribe(res => console.log(res),
         error => console.log(error));
   }
+
+
 
 }

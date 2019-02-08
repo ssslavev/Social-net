@@ -101,3 +101,14 @@
     color: #fff;
     cursor: pointer;
 }
+
+.friends-buttons {
+    margin-top: 15px;
+}
+
+.friends-buttons .btn {
+    margin-left: 10px;
+
+}
+
+

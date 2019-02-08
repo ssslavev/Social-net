@@ -19,3 +19,16 @@
  #inputGroupFileAddon04 {
     outline:none; 
  }
+
+ img {
+    position: relative;
+    float: left;
+    width:  200px;
+    height: 200px;
+    background-position: 50% 50%;
+    background-repeat:   no-repeat;
+    background-size:     cover;
+    object-fit:scale-down;
+}
+
+

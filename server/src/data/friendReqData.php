@@ -112,4 +112,24 @@ class FriendReqData {
         }
 
     }
+
+    public function getAllRequests($loggedUserId) {
+        $sql = "SELECT friend_req_id, from_user, from_name  FROM friendreq  WHERE  to_user=:to_user";
+
+        try {
+            $db = new Db();
+            $db = $db->connect();
+    
+            $stmt = $db->prepare($sql);
+            $stmt->bindParam(':to_user', $loggedUserId);
+            $stmt->execute();
+
+            $request =  $stmt->fetchAll(PDO::FETCH_OBJ);
+            
+            return $request;
+                
+        } catch(PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
 }

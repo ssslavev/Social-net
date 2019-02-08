@@ -34,4 +34,8 @@ export class FriendReqService {
     return this.http.post("http://my-social-net/api/users/friends", {loggedUserId, id});
   }
 
+  getAllRequests(userId) {
+    return this.http.get(`http://my-social-net/api/users/${userId}/friends/all-requests`);
+  }
+
 }

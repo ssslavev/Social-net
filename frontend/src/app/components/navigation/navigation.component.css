@@ -19,12 +19,35 @@ a:hover {
     transform: scale(1.1);
 }
 
-.active {
+.active:not(#user-image) {
     filter: brightness(70%);
-   transform: scale(1.2);
+    transform: scale(1.2);
 }
 
 nav img {
     visibility: visible;
     display: block;
+}
+
+#user img {
+    visibility: visible;
+    display: inline-block;
+    border-radius: 50%;
+    
+}
+
+.req-user {
+    display: inline-block;
+    width: 60px;
+    height: 40px;
+}
+
+.req-buttons {
+    display: inline-block;
+    margin-left: 244px;
+    
+}
+
+.req-buttons .btn-danger {
+    margin-left: 15px;
 }

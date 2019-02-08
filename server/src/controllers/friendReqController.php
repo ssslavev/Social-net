@@ -66,6 +66,15 @@ class FriendReqController {
        return $response->withJson($friends);
     }   
 
+    public function getAllRequests(Request $request, Response $response, array $args) {
+        
+        $user_id = intval($args['id']);
 
+        $friendReqData = new FriendReqData();
+
+        $requests = $friendReqData->getAllRequests($user_id);
+
+        return $response->withJson($requests);
+    }
 
 }
