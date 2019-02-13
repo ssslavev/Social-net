@@ -18,6 +18,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
   subscription;
   subscription2;
   requests;
+  hidden;
 
   constructor(private router: Router,
     private authService: AuthService,
@@ -45,7 +46,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
     }
 
     this.reqService.getAllRequests(this.isLoggedIn$)
-        .subscribe(requests=> this.requests = requests);
+      .subscribe(requests => this.requests = requests);
   }
 
   logOut() {
@@ -66,6 +67,20 @@ export class NavigationComponent implements OnInit, OnDestroy {
     this.reqService.acceptReq(isLoggedIn$, id)
       .subscribe(res => console.log(res),
         error => console.log(error));
+  }
+
+  onSelect(request) {
+    let index = this.requests
+      .findIndex(localRequest => localRequest.friend_req_id == request.friend_req_id)
+    this.requests.splice(index, 1);
+    this.deleteReq(this.isLoggedIn$, request.from_user);
+  }
+
+  deleteReq(isLoggedIn$, id) {
+      this.reqService.deleteRequest(isLoggedIn$, id)
+        .subscribe(result => console.log(result),
+        error=> console.log(error)
+        )
   }
 
 

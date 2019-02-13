@@ -77,4 +77,17 @@ class FriendReqController {
         return $response->withJson($requests);
     }
 
+    public function deleteRequest(Request $request, Response $response, array $args) {
+
+        $loggedUserId =  intval($request->getParam('loggedUserId'));
+        $id =  intval($request->getParam('id'));
+
+        $friendReqData = new FriendReqData();
+
+        $requests = $friendReqData->deleteRequest($loggedUserId, $id);
+        
+        return $response->withJson($requests);
+
+    }
+
 }

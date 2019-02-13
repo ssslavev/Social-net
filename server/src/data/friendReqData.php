@@ -132,4 +132,25 @@ class FriendReqData {
             echo $e->getMessage();
         }
     }
+
+    public function deleteRequest($loggedUserId, $id) {
+        $sql = "DELETE FROM friendreq  WHERE from_user=:from_user AND  to_user=:to_user";
+
+        try {
+            $db = new Db();
+            $db = $db->connect();
+    
+            $stmt = $db->prepare($sql);
+            $stmt->bindParam(':to_user', $loggedUserId);
+            $stmt->bindParam(':from_user', $id);
+            $stmt->execute();
+
+           // $request =  $stmt->fetchAll(PDO::FETCH_OBJ);
+            
+            //return $request;
+                
+        } catch(PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
 }

@@ -52,10 +52,10 @@
               </button>
             </div>
             <div class="modal-body">
-              <div *ngFor="let request of requests">
+              <div  *ngFor="let request of requests">
                 <div class="req-user">{{request.from_name}}</div>
                 <div class="req-buttons">
-                  <button type="button" class="btn btn-success" (click)="acceptReq(isLoggedIn$, request.from_user)">Accept</button>
+                  <button type="button" class="btn btn-success" (click)="onSelect(request)" (click)="acceptReq(isLoggedIn$, request.from_user)">Accept</button>
                   <button type="button" class="btn btn-danger">Ignore</button>
                 </div>
                 <hr>

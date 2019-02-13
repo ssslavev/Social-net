@@ -4,7 +4,7 @@
     <div class="col-md-6 mx-auto">
       <div id="image-upload" class="input-group">
         <div class="custom-file">
-          <input type="file" accept="image/*" maxFileSize="10000000000" class="custom-file-input" (change)="onFileSelect($event)"
+          <input type="file"  accept="image/*" maxFileSize="10000000000" class="custom-file-input" (change)="op.toggle($event)" (change)="onFileSelect($event)"
             id="inputGroupFile04" aria-describedby="inputGroupFileAddon04">
           <label class="custom-file-label" for="inputGroupFile04">Choose file</label>
         </div>
@@ -12,7 +12,9 @@
           <button class="btn btn-outline-secondary" [disabled]="isDisabled" type="button" (click)="uploadFile()" id="inputGroupFileAddon04">Upload</button>
         </div>
       </div>
-      <img *ngIf="imageSrc"  [src]= imageSrc alt="" srcset="">
+      <p-overlayPanel #op>
+          <img *ngIf="imageSrc"  [src]= imageSrc alt="" srcset="">
+      </p-overlayPanel>
     </div>
   </div>
   <h1 class="my-4 text-center text-lg-left">Gallery</h1>

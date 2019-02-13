@@ -248,3 +248,8 @@
 }
 
 button:focus {outline:0;}
+
+.ng-trigger {
+    top: 75px !important;
+    left: 17px !important;
+}

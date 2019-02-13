@@ -39,10 +39,10 @@ export class UserPicturesComponent implements OnInit {
     this.selectedFile = <File>event.target.files[0];
     this.isDisabled = false;
     let fr = new FileReader();
-     fr.readAsDataURL(this.selectedFile);
-     fr.onload = (_event) => {
-       console.log(fr.result) 
-      this.imageSrc = fr.result ; 
+    fr.readAsDataURL(this.selectedFile);
+    fr.onload = (_event) => {
+
+      this.imageSrc = fr.result;
     }
 
   }
@@ -51,10 +51,12 @@ export class UserPicturesComponent implements OnInit {
     console.log('here');
     this.fd = new FormData();
     this.fd.append('image', this.selectedFile, this.selectedFile.name);
-    
+
     this.imagesService.addImage(localStorage.getItem('logged-user-id'), this.fd)
-      .subscribe(() => { console.log("image is uploaded")
-                         this.refreshData();},
+      .subscribe(() => {
+        console.log("image is uploaded")
+        this.refreshData();
+      },
         error => console.log(error));
   }
 

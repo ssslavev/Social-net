@@ -38,4 +38,8 @@ export class FriendReqService {
     return this.http.get(`http://my-social-net/api/users/${userId}/friends/all-requests`);
   }
 
+  deleteRequest(loggedUserId, id) {
+    return this.http.post("http://my-social-net/api/users/friends/requests", {loggedUserId, id});
+  }
+
 }

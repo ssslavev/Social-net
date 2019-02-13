@@ -51,3 +51,7 @@ nav img {
 .req-buttons .btn-danger {
     margin-left: 15px;
 }
+
+.selected {
+    display: none;
+}
