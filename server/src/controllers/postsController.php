@@ -23,6 +23,8 @@ class PostsController {
     public function getAllPosts(Request $request, Response $response, array $args) {
 
         $postsData = new PostsData();
+
+        
         
         $posts = $postsData->getAllPosts();
 

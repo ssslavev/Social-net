@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NotificationsService } from './services/notifications.service';
 import { MessageService } from 'primeng/api';
+import * as socketIO from 'socket.io-client';
 
 
 
@@ -35,6 +36,10 @@ export class AppComponent implements OnInit {
         this.loading = loading;
         console.log(loading);
       })
+
+     const socket = socketIO('http://my-social-net');
+     console.log(socket);
+      socket.on('connection', (data)=>console.log(data));
   }
 
  

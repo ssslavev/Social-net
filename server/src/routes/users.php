@@ -12,6 +12,8 @@ require_once '../src/controllers/imagesController.php';
 $container = new \Slim\Container;
 $app = new \Slim\App($container);
 
+
+
 $app->add(new Tuupola\Middleware\JwtAuthentication([
     "secure" => false,
     "secret" => "supersecretkeyyoushouldnotcommittogithub",
