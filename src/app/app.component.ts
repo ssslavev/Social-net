@@ -45,12 +45,12 @@ export class AppComponent implements OnInit {
       this.loading = loading;
     })
 
-    const socket = io('http://localhost:3000');
+   /*  const socket = io('http://localhost:3000');
     this.adapter.listFriends().subscribe(res => this.filteredParticipants = res);
     socket.on('connect', () => {
       socket.on('chat', (data) => {
       })
-    })
+    }) */
 
   }
 

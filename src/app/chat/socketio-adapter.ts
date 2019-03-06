@@ -22,7 +22,7 @@ export class SocketIoAdapter extends ChatAdapter {
     get() {
         let friendsList: IChatParticipant[] = new Array();
         let person: IChatParticipant;
-        return this.httpClient.get<any[]>('http://my-social-net/api/users')
+        return this.httpClient.get<any[]>('https://blooming-reef-24719.herokuapp.com/api/users')
             .pipe(map(users => {
                 for (const user of users) {
                     person = {
