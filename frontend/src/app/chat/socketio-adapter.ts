@@ -1,6 +1,6 @@
 import { ChatAdapter, User, Message, ParticipantResponse, IChatParticipant, ChatParticipantType, ParticipantMetadata, ChatParticipantStatus } from 'ng-chat';
 import { Observable, of } from "rxjs";
-import { map} from 'rxjs/operators';
+import { map, delay} from 'rxjs/operators';
 import { Socket } from 'ng-socket-io';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpXhrBackend } from '@angular/common/http';
@@ -9,7 +9,7 @@ import { HttpClient, HttpXhrBackend } from '@angular/common/http';
 export class SocketIoAdapter extends ChatAdapter {
 
     constructor(http: HttpClient) {
-        super()
+        super();
 
     }
 
@@ -17,6 +17,7 @@ export class SocketIoAdapter extends ChatAdapter {
     users;
     httpClient = new HttpClient(new HttpXhrBackend({ build: () => new XMLHttpRequest() }));
   
+    
 
     get() {
         let friendsList: IChatParticipant[] = new Array();
@@ -26,10 +27,10 @@ export class SocketIoAdapter extends ChatAdapter {
             .pipe(map(users => {
                 for (const user of users) {
                     person = {
-                        status: ChatParticipantStatus.Away,
+                        status: ChatParticipantStatus.Online,
                         avatar: 'https://thumbnail.myheritageimages.com/502/323/78502323/000/000114_884889c3n33qfe004v5024_C_64x64C.jpg',
                         displayName: user.name,
-                        id: 1,
+                        id: Math.floor(Math.random() * 11),
                         participantType: ChatParticipantType.User
                     };
                     friendsList.push(person);
@@ -43,7 +44,7 @@ export class SocketIoAdapter extends ChatAdapter {
         let participantResponseArray: ParticipantResponse[] = new Array();
         let participantResponse: ParticipantResponse;
         let metadata = new ParticipantMetadata();
-        metadata.totalUnreadMessages = 1;
+        metadata.totalUnreadMessages = Math.floor(Math.random() * 11);
 
         return this.get().pipe(map(users => {
 
@@ -71,7 +72,18 @@ export class SocketIoAdapter extends ChatAdapter {
 
 
     getMessageHistory(userId: any): Observable<Message[]> {
-        return of([]);
+        let mockedHistory: Array<Message>;
+
+        mockedHistory = [
+            {
+                fromId: 1,
+                toId: 999,
+                message: "Hi there, just type any message bellow to test this Angular module.",
+                dateSent: new Date()
+            }
+        ];
+
+        return of(mockedHistory).pipe(delay(2000));
 
     }
 
