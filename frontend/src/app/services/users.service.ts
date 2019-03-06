@@ -11,6 +11,10 @@ export class UsersService {
   getUserById(id) {
     return this.http.get(`http://my-social-net/api/users/${id}`);
   }
+
+  getAllUsers() {
+    return this.http.get('http://my-social-net/api/users');
+  }
 }
 
 

@@ -50,7 +50,6 @@ export class HomeComponent implements OnInit {
 
     this.notificationService.getSpinerChange.subscribe(loading => {
       this.loading = loading;
-      console.log(loading);
     })
 
   }

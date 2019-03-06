@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { NotificationsService } from './services/notifications.service';
 import { MessageService } from 'primeng/api';
-import * as socketIO from 'socket.io-client';
+import * as io from 'socket.io-client';
+import { ChatAdapter } from 'ng-chat';
+import { SocketIoAdapter } from './chat/socketio-adapter';
+import { UsersService } from './services/users.service';
+import { HttpClient } from '@angular/common/http';
+
 
 
 
@@ -17,6 +22,10 @@ export class AppComponent implements OnInit {
   loggedIn;
   id: number;
   loading;
+  http: HttpClient;
+  userId = 1;
+  public adapter: ChatAdapter = new SocketIoAdapter(this.http);
+  filteredParticipants;
 
 
   constructor(private notificationService: NotificationsService) {
@@ -32,21 +41,24 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-      this.notificationService.getSpinerChange.subscribe(loading => {
-        this.loading = loading;
-        console.log(loading);
-      })
+    this.notificationService.getSpinerChange.subscribe(loading => {
+      this.loading = loading;
+    })
 
-     const socket = socketIO('http://my-social-net');
-     console.log(socket);
-      socket.on('connection', (data)=>console.log(data));
+    const socket = io('http://localhost:3000');
+    this.adapter.listFriends().subscribe(res => this.filteredParticipants = res);
+    socket.on('connect', () => {
+      socket.on('chat', (data) => {
+      })
+    })
+
   }
 
- 
+
 
   addClass(id) {
     this.id = id;
   }
 
- 
+
 }

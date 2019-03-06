@@ -10,6 +10,10 @@ import {ProgressSpinnerModule} from 'primeng/progressspinner';
 import {TabMenuModule} from 'primeng/tabmenu';
 import {FileUploadModule} from 'primeng/fileupload';
 import {OverlayPanelModule} from 'primeng/overlaypanel';
+import { NgChatModule } from 'ng-chat';
+import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
+ 
+const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
@@ -25,6 +29,7 @@ import { UserMainComponent } from './components/user-main/user-main.component';
 import { UserInfoComponent } from './components/user-info/user-info.component';
 import { UserFriendsComponent } from './components/user-friends/user-friends.component';
 import { UserPicturesComponent } from './components/user-pictures/user-pictures.component';
+import { SocketIoAdapter } from './chat/socketio-adapter';
 
 @NgModule({
   declarations: [
@@ -51,9 +56,11 @@ import { UserPicturesComponent } from './components/user-pictures/user-pictures.
     ,ProgressSpinnerModule,
     TabMenuModule,
     FileUploadModule,
-    OverlayPanelModule
+    OverlayPanelModule,
+    NgChatModule,
+    SocketIoModule.forRoot(config)
   ],
-  providers: [AuthGuard, NotificationsService, MessageService],
+  providers: [AuthGuard, NotificationsService, MessageService, SocketIoAdapter],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
