@@ -11,16 +11,16 @@ export class PostsService {
 
   getAllPosts() {
 
-    return this.http.get('http://my-social-net/api/posts');
+    return this.http.get('https://blooming-reef-24719.herokuapp.com/api/posts');
 
   }
 
   addPost(content: string, user_id: number) {
-    return this.http.post('http://my-social-net/api/posts', {content, user_id})
+    return this.http.post('https://blooming-reef-24719.herokuapp.com/api/posts', {content, user_id})
   }
 
   getPostsByUser(userId: number): Observable<any> {
-    return this.http.get(`http://my-social-net/api/users/posts/${userId}`);
+    return this.http.get(`https://blooming-reef-24719.herokuapp.com/api/users/posts/${userId}`);
   }
 }
 

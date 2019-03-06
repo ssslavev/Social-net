@@ -1,6 +1,6 @@
 import { ChatAdapter, User, Message, ParticipantResponse, IChatParticipant, ChatParticipantType, ParticipantMetadata, ChatParticipantStatus } from 'ng-chat';
 import { Observable, of } from "rxjs";
-import { map, delay} from 'rxjs/operators';
+import { map, delay } from 'rxjs/operators';
 import { Socket } from 'ng-socket-io';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpXhrBackend } from '@angular/common/http';
@@ -16,14 +16,13 @@ export class SocketIoAdapter extends ChatAdapter {
     private socket: Socket;
     users;
     httpClient = new HttpClient(new HttpXhrBackend({ build: () => new XMLHttpRequest() }));
-  
-    
+
+
 
     get() {
         let friendsList: IChatParticipant[] = new Array();
         let person: IChatParticipant;
         return this.httpClient.get<any[]>('http://my-social-net/api/users')
-
             .pipe(map(users => {
                 for (const user of users) {
                     person = {

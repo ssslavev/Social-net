@@ -29,7 +29,7 @@ export class AuthService {
 
   register(name: string, password: string, firstName: string, lastName: string, email: string) {
 
-    return this.http.post('http://my-social-net/api/users/register', { name, password, firstName, lastName, email })
+    return this.http.post('https://blooming-reef-24719.herokuapp.com/api/users/register', { name, password, firstName, lastName, email })
       .pipe(catchError(this.handleError));
     //.subscribe(res => console.log(res),
     // error => console.log(error));
@@ -37,7 +37,7 @@ export class AuthService {
 
   login(name: string, password: string) {
     this.notificationService.emitSpiner(true);
-    return this.http.post('http://my-social-net/api/users/login', { name, password })
+    return this.http.post('https://blooming-reef-24719.herokuapp.com/api/users/login', { name, password })
       .subscribe(user => {
         localStorage.setItem('token', user['token']);
         localStorage.setItem('logged-user-id', user['user']['user_id']);

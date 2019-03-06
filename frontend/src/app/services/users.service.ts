@@ -9,11 +9,11 @@ export class UsersService {
   constructor(private http: HttpClient) { }
 
   getUserById(id) {
-    return this.http.get(`http://my-social-net/api/users/${id}`);
+    return this.http.get(`https://blooming-reef-24719.herokuapp.com/api/users/${id}`);
   }
 
   getAllUsers() {
-    return this.http.get('http://my-social-net/api/users');
+    return this.http.get('https://blooming-reef-24719.herokuapp.com/api/users');
   }
 }
 
