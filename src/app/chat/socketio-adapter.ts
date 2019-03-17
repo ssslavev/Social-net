@@ -8,13 +8,12 @@ import { HttpClient, HttpXhrBackend } from '@angular/common/http';
 @Injectable()
 export class SocketIoAdapter extends ChatAdapter {
 
-    private userId: string;
-    private socket: Socket;
+    private userId
     users;
     httpClient = new HttpClient(new HttpXhrBackend({ build: () => new XMLHttpRequest() }));
 
 
-    constructor(userId: string) {
+    constructor(userId) {
         super();
         this.userId = userId;
     }
