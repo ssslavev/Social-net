@@ -79,7 +79,15 @@ export class SocketIoAdapter extends ChatAdapter {
                 toId: 999,
                 message: "Hi there, just type any message bellow to test this Angular module.",
                 dateSent: new Date()
+            },
+            {
+                fromId: 999,
+                toId: 1,
+                message: "Hi there, just type any message bellow to test this Angular module.",
+                dateSent: new Date()
             }
+
+
         ];
 
         return of(mockedHistory).pipe(delay(2000));
