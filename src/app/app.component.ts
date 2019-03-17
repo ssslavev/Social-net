@@ -31,7 +31,7 @@ export class AppComponent implements OnInit {
   isLoggedIn$;
   subscription;
   subscription2;
-  public adapter: ChatAdapter =  new SocketIoAdapter(this.isLoggedIn$);; 
+  public adapter: ChatAdapter =  new SocketIoAdapter();; 
   
 
 
