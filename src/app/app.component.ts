@@ -31,7 +31,7 @@ export class AppComponent implements OnInit {
   isLoggedIn$;
   subscription;
   subscription2;
-  public adapter: ChatAdapter; 
+  public adapter: ChatAdapter =  new SocketIoAdapter(this.isLoggedIn$);; 
   
 
 
@@ -66,7 +66,7 @@ export class AppComponent implements OnInit {
 
     }
 
-    this.adapter = new SocketIoAdapter(this.isLoggedIn$);
+    
 
 
     this.notificationService.getSpinerChange.subscribe(loading => {
