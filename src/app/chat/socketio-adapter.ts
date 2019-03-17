@@ -8,28 +8,32 @@ import { HttpClient, HttpXhrBackend } from '@angular/common/http';
 @Injectable()
 export class SocketIoAdapter extends ChatAdapter {
 
-    constructor(http: HttpClient) {
-        super();
-
-    }
-
+    private userId: string;
     private socket: Socket;
     users;
     httpClient = new HttpClient(new HttpXhrBackend({ build: () => new XMLHttpRequest() }));
 
 
+    constructor(userId: string) {
+        super();
+        this.userId = userId;
+    }
+
+    
+
 
     get() {
+        console.log(this.userId);
         let friendsList: IChatParticipant[] = new Array();
         let person: IChatParticipant;
-        return this.httpClient.post<any[]>('https://blooming-reef-24719.herokuapp.com/api/users/friendsList', {"loggedUserId": 2})
+        return this.httpClient.post<any[]>('https://blooming-reef-24719.herokuapp.com/api/users/friendsList', {"loggedUserId": this.userId })
             .pipe(map(users => {
                 for (const user of users) {
                     person = {
                         status: ChatParticipantStatus.Online,
                         avatar: 'https://thumbnail.myheritageimages.com/502/323/78502323/000/000114_884889c3n33qfe004v5024_C_64x64C.jpg',
                         displayName: user.name,
-                        id: Math.floor(Math.random() * 11),
+                        id: user.user_id,
                         participantType: ChatParticipantType.User
                     };
                     friendsList.push(person);
