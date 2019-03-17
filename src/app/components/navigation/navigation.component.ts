@@ -30,9 +30,6 @@ export class NavigationComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    
-
-
     if (localStorage.getItem('logged-user-id')) {
       this.user$ = localStorage.getItem('logged-user-name');
       this.isLoggedIn$ = localStorage.getItem('logged-user-id');
@@ -46,11 +43,13 @@ export class NavigationComponent implements OnInit, OnDestroy {
       });
 
     }
+ 
+  }
 
+  getRequests() {
     this.reqService.getAllRequests(this.isLoggedIn$)
-      .subscribe(requests => this.requests = requests);
-
-    
+    .subscribe(requests => { this.requests = requests,
+    console.log(requests)});
   }
 
   logOut() {

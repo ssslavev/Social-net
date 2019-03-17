@@ -9,8 +9,17 @@ export class NotificationsService {
   username: Subject<any> = new BehaviorSubject<any>(null);
   userId: Subject<any> = new BehaviorSubject<any>(null);
   spiner: Subject<any> = new BehaviorSubject<any>(null);
+  emitFriends: Subject<any> = new BehaviorSubject<any>(null);
 
   constructor() { }
+
+  emitFr(value: any) {
+    this.emitFriends.next(value);
+  }
+
+  get emitUserFriendsChange(): BehaviorSubject<any> {
+    return (this.emitFriends as BehaviorSubject<any>);
+  }
 
   emit(value: any) {
     this.emitChange$.next(value);

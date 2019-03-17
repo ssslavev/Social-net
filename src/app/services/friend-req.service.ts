@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { NotificationsService } from './notifications.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FriendReqService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+    private notificationService: NotificationsService,) { }
 
   sendFriendRequest(loggedUserId: number, id: number, loggedUserName: string) {
 
@@ -35,7 +37,7 @@ export class FriendReqService {
   }
 
   getAllRequests(userId) {
-    return this.http.get(`https://blooming-reef-24719.herokuapp.com/api/users/${userId}/friends/all-requests`);
+    return this.http.get(`https://blooming-reef-24719.herokuapp.com/api/users/${userId}/friends/all-requests`)
   }
 
   deleteRequest(loggedUserId, id) {

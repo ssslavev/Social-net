@@ -12,7 +12,7 @@
         <a class="nav-link" routerLinkActive="active" routerLink='/home'>Home</a>
       </li>
       <li class="navbar-nav mr-auto">
-        <a class="nav-link" data-toggle="modal" data-target="#exampleModalCenter" routerLinkActive="active"><img width="22"
+        <a class="nav-link" (click)="getRequests()" data-toggle="modal" data-target="#exampleModalCenter" routerLinkActive="active"><img width="22"
             height="22" src="../../../assets/images/sharp_people_white_18dp.png" alt="" srcset=""></a>
       </li>
       <li *ngIf="!(isLoggedIn$)" class="nav-item">
@@ -41,6 +41,7 @@
   <p-toast position="top-right" autoZIndex="true" [hideTransitionOptions]="'2000ms'">
   </p-toast>
 </nav>
+
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
