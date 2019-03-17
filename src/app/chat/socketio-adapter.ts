@@ -22,7 +22,7 @@ export class SocketIoAdapter extends ChatAdapter {
     get() {
         let friendsList: IChatParticipant[] = new Array();
         let person: IChatParticipant;
-        return this.httpClient.get<any[]>('https://blooming-reef-24719.herokuapp.com/api/users')
+        return this.httpClient.post<any[]>('https://blooming-reef-24719.herokuapp.com/api/users/friendsList', {"loggedUserId": 2})
             .pipe(map(users => {
                 for (const user of users) {
                     person = {
