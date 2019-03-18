@@ -11,7 +11,7 @@
       <li class="nav-item">
         <a class="nav-link" routerLinkActive="active" routerLink='/home'>Home</a>
       </li>
-      <li class="navbar-nav mr-auto">
+      <li *ngIf="isLoggedIn$" class="navbar-nav mr-auto">
         <a class="nav-link" (click)="getRequests()" data-toggle="modal" data-target="#exampleModalCenter" routerLinkActive="active"><img width="22"
             height="22" src="../../../assets/images/sharp_people_white_18dp.png" alt="" srcset=""></a>
       </li>
@@ -24,7 +24,7 @@
       <li *ngIf="isLoggedIn$" class="navbar-nav mr-auto">
         <a class="nav-link" (click)="logOut()">Logout</a>
       </li>
-      <li class="navbar-nav mr-auto">
+      <li *ngIf="isLoggedIn$" class="navbar-nav mr-auto">
         <a class="nav-link" id="user" routerLink='/users/{{isLoggedIn$}}'><span id="user-image"><img height="26" width="26"
               src="../../../assets/images/27072741_10208620600791988_96416950358670516_n.jpg" alt="" srcset=""></span>
           {{user$}} </a>

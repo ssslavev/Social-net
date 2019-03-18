@@ -5,10 +5,12 @@ import { Socket } from 'ng-socket-io';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpXhrBackend } from '@angular/common/http';
 
+
+
 @Injectable()
 export class SocketIoAdapter extends ChatAdapter {
 
-    private userId
+    userId
     users;
     httpClient = new HttpClient(new HttpXhrBackend({ build: () => new XMLHttpRequest() }));
 
@@ -22,9 +24,10 @@ export class SocketIoAdapter extends ChatAdapter {
 
 
     get() {
+        
         let friendsList: IChatParticipant[] = new Array();
         let person: IChatParticipant;
-        return this.httpClient.post<any[]>('https://blooming-reef-24719.herokuapp.com/api/users/friendsList', {"loggedUserId": 2 })
+        return this.httpClient.post<any[]>('https://blooming-reef-24719.herokuapp.com/api/users/friendsList', {"loggedUserId": localStorage.getItem('logged-user-id') })
             .pipe(map(users => {
                 for (const user of users) {
                     person = {
