@@ -1,10 +1,9 @@
 <app-navigation></app-navigation>
 
 <div id="main" class="container">
-   
-    
-        <p-progressSpinner strokeWidth="5" *ngIf="loading"  ></p-progressSpinner>  
-        <ng-chat [adapter]="adapter"  [userId]="userId" [theme]="'dark-theme'"></ng-chat>
+
+    <p-progressSpinner strokeWidth="5" *ngIf="loading"></p-progressSpinner>
+    <ng-chat *ngIf="isLoggedIn$" [adapter]="adapter" [userId]="userId" [theme]="'dark-theme'"></ng-chat>
     <router-outlet></router-outlet>
-    
+
 </div>
