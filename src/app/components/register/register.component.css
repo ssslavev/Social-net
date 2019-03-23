@@ -43,3 +43,8 @@ input.ng-invalid.ng-dirty {
 input.ng-valid.ng-dirty {
   background-color:lightgreen;
 }
+
+
+#register-submit:disabled {
+  cursor: no-drop;
+}
