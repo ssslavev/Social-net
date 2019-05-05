@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { retry, catchError } from 'rxjs/operators';
 import { NotificationsService } from './notifications.service';
 import { MessageService } from 'primeng/api';
+import { tokenKey } from '@angular/core/src/view';
 @Injectable({
   providedIn: 'root'
 })
@@ -59,6 +60,11 @@ export class AuthService {
         error => this.handleError,
         () => this.notificationService.emitSpiner(false));
 
+  }
+
+  getToken() {
+    let token = localStorage.getItem('token');
+    return token;
   }
 
   private handleError(errorResponse: HttpErrorResponse) {

@@ -1,18 +1,18 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {ToastModule} from 'primeng/toast';
-import {MessageService} from 'primeng/api';
-import {ProgressSpinnerModule} from 'primeng/progressspinner';
-import {TabMenuModule} from 'primeng/tabmenu';
-import {FileUploadModule} from 'primeng/fileupload';
-import {OverlayPanelModule} from 'primeng/overlaypanel';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { TabMenuModule } from 'primeng/tabmenu';
+import { FileUploadModule } from 'primeng/fileupload';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { NgChatModule } from 'ng-chat';
 import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
- 
+
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 
 import { AppComponent } from './app.component';
@@ -30,6 +30,7 @@ import { UserInfoComponent } from './components/user-info/user-info.component';
 import { UserFriendsComponent } from './components/user-friends/user-friends.component';
 import { UserPicturesComponent } from './components/user-pictures/user-pictures.component';
 import { SocketIoAdapter } from './chat/socketio-adapter';
+import { JwtInterceptorService } from './interceptors/jwt-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -53,14 +54,18 @@ import { SocketIoAdapter } from './chat/socketio-adapter';
     FormsModule,
     BrowserAnimationsModule,
     ToastModule
-    ,ProgressSpinnerModule,
+    , ProgressSpinnerModule,
     TabMenuModule,
     FileUploadModule,
     OverlayPanelModule,
     NgChatModule,
     SocketIoModule.forRoot(config)
   ],
-  providers: [AuthGuard, NotificationsService, MessageService, SocketIoAdapter],
+  providers: [AuthGuard,
+    NotificationsService,
+    MessageService,
+    SocketIoAdapter,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorService, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

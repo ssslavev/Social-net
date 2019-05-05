@@ -8,32 +8,32 @@ import { NotificationsService } from './notifications.service';
 export class FriendReqService {
 
   constructor(private http: HttpClient,
-    private notificationService: NotificationsService,) { }
+    private notificationService: NotificationsService, ) { }
 
   sendFriendRequest(loggedUserId: number, id: number, loggedUserName: string) {
 
-   return  this.http.post('https://blooming-reef-24719.herokuapp.com/api/users/friends/request', {loggedUserId, id, loggedUserName});
+    return this.http.post('https://blooming-reef-24719.herokuapp.com/api/users/friends/request', { loggedUserId, id, loggedUserName });
 
   }
 
   getFromReq(loggedUserId: number, id: number) {
 
-    return this.http.post("https://blooming-reef-24719.herokuapp.com/api/users/friends/fromreq", {loggedUserId, id});
+    return this.http.post("https://blooming-reef-24719.herokuapp.com/api/users/friends/fromreq", { loggedUserId, id });
   }
 
   getToReq(loggedUserId: number, id: number) {
 
-    return this.http.post("https://blooming-reef-24719.herokuapp.com/api/users/friends/toreq", {loggedUserId, id});
+    return this.http.post("https://blooming-reef-24719.herokuapp.com/api/users/friends/toreq", { loggedUserId, id });
   }
 
   acceptReq(loggedUserId: number, id: number) {
 
-    return this.http.post("https://blooming-reef-24719.herokuapp.com/api/users/friends/acceptreq", {loggedUserId, id});
+    return this.http.post("https://blooming-reef-24719.herokuapp.com/api/users/friends/acceptreq", { loggedUserId, id });
   }
 
   getFriends(loggedUserId: number, id: number) {
 
-    return this.http.post("https://blooming-reef-24719.herokuapp.com/api/users/friends", {loggedUserId, id});
+    return this.http.post("https://blooming-reef-24719.herokuapp.com/api/users/friends", { loggedUserId, id });
   }
 
   getAllRequests(userId) {
@@ -41,7 +41,11 @@ export class FriendReqService {
   }
 
   deleteRequest(loggedUserId, id) {
-    return this.http.post("https://blooming-reef-24719.herokuapp.com/api/users/friends/requests", {loggedUserId, id});
+    return this.http.post("https://blooming-reef-24719.herokuapp.com/api/users/friends/requests", { loggedUserId, id });
+  }
+
+  getFriendsList() {
+    return this.http.post<any[]>('https://blooming-reef-24719.herokuapp.com/api/users/friendsList', { "loggedUserId": localStorage.getItem('logged-user-id') });
   }
 
 }

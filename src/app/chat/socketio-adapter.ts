@@ -3,7 +3,7 @@ import { Observable, of } from "rxjs";
 import { map, delay } from 'rxjs/operators';
 import { Socket } from 'ng-socket-io';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpXhrBackend } from '@angular/common/http';
+import { FriendReqService } from '../services/friend-req.service';
 
 
 
@@ -12,22 +12,19 @@ export class SocketIoAdapter extends ChatAdapter {
 
     userId
     users;
-    httpClient = new HttpClient(new HttpXhrBackend({ build: () => new XMLHttpRequest() }));
 
 
-    constructor() {
+    constructor(private friendsReqService: FriendReqService) {
         super();
-        
-    }
 
-    
+    }
 
 
     get() {
-        
+
         let friendsList: IChatParticipant[] = new Array();
         let person: IChatParticipant;
-        return this.httpClient.post<any[]>('https://blooming-reef-24719.herokuapp.com/api/users/friendsList', {"loggedUserId": localStorage.getItem('logged-user-id') })
+        return this.friendsReqService.getFriendsList()
             .pipe(map(users => {
                 for (const user of users) {
                     person = {

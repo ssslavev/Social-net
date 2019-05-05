@@ -31,13 +31,14 @@ export class AppComponent implements OnInit {
   isLoggedIn$;
   subscription;
   subscription2;
-  public adapter: ChatAdapter =  new SocketIoAdapter();; 
-  
+  public adapter: ChatAdapter;
+  // = new SocketIoAdapter(FriendReqService);
+
 
 
 
   constructor(private notificationService: NotificationsService,
-    private reqService: FriendReqService) {
+    private frReqService: FriendReqService) {
     this.notificationService.emitChange.subscribe(
       message => {
         if (message == 'Username already exists!') {
@@ -47,6 +48,8 @@ export class AppComponent implements OnInit {
         }
       }
     );
+
+    this.adapter = new SocketIoAdapter(this.frReqService);
   }
 
   ngOnInit() {
@@ -66,7 +69,7 @@ export class AppComponent implements OnInit {
 
     }
 
-    
+
 
 
     this.notificationService.getSpinerChange.subscribe(loading => {
