@@ -1,10 +1,10 @@
 import { Component, OnInit, OnChanges, Input, OnDestroy, DoCheck } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/services/auth.service';
+import { AuthService } from 'src/app/core/services/auth.service';
 import { Observable } from 'rxjs';
 import { MessageService } from 'primeng/api';
-import { NotificationsService } from 'src/app/services/notifications.service';
-import { FriendReqService } from 'src/app/services/friend-req.service';
+import { NotificationsService } from 'src/app/core/services/notifications.service';
+import { FriendReqService } from 'src/app/core/services/friend-req.service';
 
 @Component({
   selector: 'app-navigation',
@@ -13,8 +13,8 @@ import { FriendReqService } from 'src/app/services/friend-req.service';
 })
 export class NavigationComponent implements OnInit, DoCheck {
 
-  isLoggedIn$;
-  user$;
+  isLoggedIn;
+  user;
   requests;
 
 
@@ -29,14 +29,14 @@ export class NavigationComponent implements OnInit, DoCheck {
   }
 
   ngDoCheck(): void {
-    this.isLoggedIn$ = localStorage.getItem('logged-user-id');
-    this.user$ = localStorage.getItem('logged-user-name');
+    this.isLoggedIn = localStorage.getItem('logged-user-id');
+    this.user = localStorage.getItem('logged-user-name');
   }
 
 
 
   getRequests() {
-    this.reqService.getAllRequests(this.isLoggedIn$)
+    this.reqService.getAllRequests(this.isLoggedIn)
       .subscribe(requests => {
         this.requests = requests,
           console.log(requests)
@@ -63,7 +63,7 @@ export class NavigationComponent implements OnInit, DoCheck {
     let index = this.requests
       .findIndex(localRequest => localRequest.friend_req_id == request.friend_req_id)
     this.requests.splice(index, 1);
-    this.deleteReq(this.isLoggedIn$, request.from_user);
+    this.deleteReq(this.isLoggedIn, request.from_user);
   }
 
   deleteReq(isLoggedIn$, id) {

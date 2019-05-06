@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
-import { ImagesService } from 'src/app/services/images.service';
 import { ActivatedRoute } from '@angular/router';
-import { NotificationsService } from 'src/app/services/notifications.service';
+import { NotificationsService } from 'src/app/core/services/notifications.service';
+import { ImagesService } from 'src/app/core/services/images.service';
 
 @Component({
   selector: 'app-user-pictures',

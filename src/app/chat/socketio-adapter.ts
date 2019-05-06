@@ -3,7 +3,7 @@ import { Observable, of } from "rxjs";
 import { map, delay } from 'rxjs/operators';
 import { Socket } from 'ng-socket-io';
 import { Injectable } from '@angular/core';
-import { FriendReqService } from '../services/friend-req.service';
+import { FriendReqService } from '../core/services/friend-req.service';
 
 
 

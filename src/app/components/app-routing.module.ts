@@ -6,11 +6,12 @@ import { RegisterComponent } from './register/register.component'
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
-import { AuthGuard } from '../guards/auth.guard';
+
 import { UserMainComponent } from './user-main/user-main.component';
 import { UserInfoComponent } from './user-info/user-info.component';
 import { UserFriendsComponent } from './user-friends/user-friends.component';
 import { UserPicturesComponent } from './user-pictures/user-pictures.component';
+import { AuthGuard } from '../core/guards/auth.guard';
 
 const routes: Routes = [
   { path: 'register', component: RegisterComponent },

@@ -23,14 +23,14 @@ import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { PostComponent } from './components/post/post.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
-import { AuthGuard } from './guards/auth.guard';
-import { NotificationsService } from './services/notifications.service';
+import { AuthGuard } from './core/guards/auth.guard';
+import { NotificationsService } from './core/services/notifications.service';
 import { UserMainComponent } from './components/user-main/user-main.component';
 import { UserInfoComponent } from './components/user-info/user-info.component';
 import { UserFriendsComponent } from './components/user-friends/user-friends.component';
 import { UserPicturesComponent } from './components/user-pictures/user-pictures.component';
 import { SocketIoAdapter } from './chat/socketio-adapter';
-import { JwtInterceptorService } from './interceptors/jwt-interceptor.service';
+import { JwtInterceptorService } from './core/interceptors/jwt-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -53,8 +53,8 @@ import { JwtInterceptorService } from './interceptors/jwt-interceptor.service';
     AppRoutingModule,
     FormsModule,
     BrowserAnimationsModule,
-    ToastModule
-    , ProgressSpinnerModule,
+    ToastModule,
+    ProgressSpinnerModule,
     TabMenuModule,
     FileUploadModule,
     OverlayPanelModule,

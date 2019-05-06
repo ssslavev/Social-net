@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UsersService } from 'src/app/services/users.service';
+import { UsersService } from 'src/app/core/services/users.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -17,7 +17,7 @@ export class UserInfoComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.route.parent.params.subscribe(params=> this.userId = params.id);
+    this.route.parent.params.subscribe(params => this.userId = params.id);
     this.usersService.getUserById(this.userId)
       .subscribe(user => this.user = user,
         error => console.error(error)

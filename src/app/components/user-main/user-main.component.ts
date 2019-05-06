@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { PostsService } from 'src/app/services/posts.service';
 import { map } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
+import { PostsService } from 'src/app/core/services/posts.service';
 
 @Component({
   selector: 'app-user-main',

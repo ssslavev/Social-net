@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { PostsService } from 'src/app/services/posts.service';
-import { NotificationsService } from 'src/app/services/notifications.service';
+import { PostsService } from 'src/app/core/services/posts.service';
+import { NotificationsService } from 'src/app/core/services/notifications.service';
 import { MessageService } from 'primeng/api';
 import { Observable } from 'rxjs';
 import { timer } from 'rxjs';
@@ -75,17 +75,17 @@ export class HomeComponent implements OnInit {
 
   private refreshData(): void {
     this.notificationService.emitSpiner(true);
-   // console.log('refresh')
+    // console.log('refresh')
     this.postsSubscription = this.postsService.getAllPosts().subscribe(posts => {
       this.posts = posts;
       //this.subscribeToData();
     },
-    error=>console.log(error),
-    ()=> this.notificationService.emitSpiner(false));
+      error => console.log(error),
+      () => this.notificationService.emitSpiner(false));
   }
 
 
- // private subscribeToData(): void {
+  // private subscribeToData(): void {
   //  let subs = this.source.pipe(first())
   //  this.timerSubscription = subs.subscribe(() => this.refreshData());
   //}
