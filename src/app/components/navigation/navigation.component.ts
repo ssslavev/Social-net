@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnChanges, Input, OnDestroy, DoCheck } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { Observable } from 'rxjs';
@@ -11,64 +11,48 @@ import { FriendReqService } from 'src/app/services/friend-req.service';
   templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.css']
 })
-export class NavigationComponent implements OnInit, OnDestroy {
+export class NavigationComponent implements OnInit, DoCheck {
 
   isLoggedIn$;
   user$;
-  subscription;
-  subscription2;
   requests;
-  hidden;
+
 
   constructor(private router: Router,
-    private authService: AuthService,
     private messageService: MessageService,
-    private notificationService: NotificationsService,
     private reqService: FriendReqService) {
 
   }
 
   ngOnInit() {
 
-    if (localStorage.getItem('logged-user-id')) {
-      this.user$ = localStorage.getItem('logged-user-name');
-      this.isLoggedIn$ = localStorage.getItem('logged-user-id');
-    } else {
-      this.subscription = this.notificationService.emitUserNameChange.subscribe(name => {
-        this.user$ = name;
-      });
-
-      this.subscription2 = this.notificationService.emitUserIdChange.subscribe(id => {
-        this.isLoggedIn$ = id;
-      });
-
-    }
- 
   }
+
+  ngDoCheck(): void {
+    this.isLoggedIn$ = localStorage.getItem('logged-user-id');
+    this.user$ = localStorage.getItem('logged-user-name');
+  }
+
+
 
   getRequests() {
     this.reqService.getAllRequests(this.isLoggedIn$)
-    .subscribe(requests => { this.requests = requests,
-    console.log(requests)});
+      .subscribe(requests => {
+        this.requests = requests,
+          console.log(requests)
+      });
   }
 
   logOut() {
     localStorage.clear();
-    this.router.navigate(['/']);
-    location.reload();
-
-
-  }
-
-
-  ngOnDestroy() {
-    this.subscription.dispose();
-    this.subscription2.dispose();
+    this.router.navigate(['/login'])
+    //location.reload();
   }
 
   acceptReq(isLoggedIn$, id) {
     this.reqService.acceptReq(isLoggedIn$, id)
-      .subscribe(res => { console.log(res)
+      .subscribe(res => {
+        console.log(res)
         this.messageService.add({ severity: 'success', summary: "You are now friends!" })
 
       },
@@ -83,11 +67,10 @@ export class NavigationComponent implements OnInit, OnDestroy {
   }
 
   deleteReq(isLoggedIn$, id) {
-      this.reqService.deleteRequest(isLoggedIn$, id)
-        .subscribe(result => console.log(result),
-        error=> console.log(error)
-        )
+    this.reqService.deleteRequest(isLoggedIn$, id)
+      .subscribe(result => console.log(result),
+        error => console.log(error)
+      )
   }
-
 
 }

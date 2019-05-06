@@ -59,6 +59,10 @@ export class SocketIoAdapter extends ChatAdapter {
                 participantResponseArray.push(participantResponse);
 
             }
+            if (participantResponseArray.length > 0) {
+
+            }
+
             return participantResponseArray;
         }))
     }

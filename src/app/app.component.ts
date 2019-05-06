@@ -1,14 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, DoCheck } from '@angular/core';
 import { NotificationsService } from './services/notifications.service';
 import { MessageService } from 'primeng/api';
 import * as io from 'socket.io-client';
 import { ChatAdapter } from 'ng-chat';
 import { SocketIoAdapter } from './chat/socketio-adapter';
-import { UsersService } from './services/users.service';
-import { HttpClient } from '@angular/common/http';
 import { FriendReqService } from './services/friend-req.service';
-
-
 
 
 @Component({
@@ -16,61 +12,21 @@ import { FriendReqService } from './services/friend-req.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, DoCheck {
 
-  error;
-  success;
-  loggedIn;
   id: number;
   loading;
-  http: HttpClient;
-  userId = 1;
+  userId;
   filteredParticipants;
-  requests;
-  user$;
   isLoggedIn$;
-  subscription;
-  subscription2;
-  public adapter: ChatAdapter;
-  // = new SocketIoAdapter(FriendReqService);
-
-
-
+  adapter: ChatAdapter;
 
   constructor(private notificationService: NotificationsService,
     private frReqService: FriendReqService) {
-    this.notificationService.emitChange.subscribe(
-      message => {
-        if (message == 'Username already exists!') {
-          this.error = message;
-        } else if (message == 'You are registered') {
-          this.success = message;
-        }
-      }
-    );
-
     this.adapter = new SocketIoAdapter(this.frReqService);
   }
 
   ngOnInit() {
-
-    if (localStorage.getItem('logged-user-id')) {
-      this.user$ = localStorage.getItem('logged-user-name');
-      this.isLoggedIn$ = localStorage.getItem('logged-user-id');
-
-    } else {
-      this.subscription = this.notificationService.emitUserNameChange.subscribe(name => {
-        this.user$ = name;
-      });
-
-      this.subscription2 = this.notificationService.emitUserIdChange.subscribe(id => {
-        this.isLoggedIn$ = id;
-      });
-
-    }
-
-
-
 
     this.notificationService.getSpinerChange.subscribe(loading => {
       this.loading = loading;
@@ -85,10 +41,9 @@ export class AppComponent implements OnInit {
 
   }
 
-
-  addClass(id) {
-    this.id = id;
+  ngDoCheck(): void {
+    this.isLoggedIn$ = localStorage.getItem('logged-user-id');
+    this.userId = +localStorage.getItem('logged-user-id');
   }
-
 
 }
