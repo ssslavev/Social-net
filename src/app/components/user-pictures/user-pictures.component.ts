@@ -61,14 +61,14 @@ export class UserPicturesComponent implements OnInit {
   }
 
   private refreshData(): void {
-    this.notificationService.emitSpiner(true);
+    this.notificationService.changeLoading(true);
     // console.log('refresh')
     this.imagesSubscription = this.imagesService.getImagesByUserId(this.userId).subscribe(images => {
       this.images = images;
       //this.subscribeToData();
     },
       error => console.log(error),
-      () => this.notificationService.emitSpiner(false));
+      () => this.notificationService.changeLoading(false));
 
   }
 }

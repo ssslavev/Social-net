@@ -2,11 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PostsService } from 'src/app/core/services/posts.service';
 import { NotificationsService } from 'src/app/core/services/notifications.service';
 import { MessageService } from 'primeng/api';
-import { Observable } from 'rxjs';
 import { timer } from 'rxjs';
-import { first } from 'rxjs/operators';
-
-
 
 
 @Component({
@@ -18,7 +14,6 @@ export class HomeComponent implements OnInit {
 
 
   posts;
-  loggedIn;
   id: number;
   postsSubscription;
   timerSubscription;
@@ -44,13 +39,6 @@ export class HomeComponent implements OnInit {
     this.postsService.getAllPosts()
       .subscribe(posts => this.posts = posts);
 
-    if (localStorage.getItem('logged-user-id')) {
-      this.loggedIn = "You are logged in!";
-    }
-
-    this.notificationService.getSpinerChange.subscribe(loading => {
-      this.loading = loading;
-    })
 
   }
 
@@ -74,14 +62,14 @@ export class HomeComponent implements OnInit {
 
 
   private refreshData(): void {
-    this.notificationService.emitSpiner(true);
+    this.notificationService.changeLoading(true);
     // console.log('refresh')
     this.postsSubscription = this.postsService.getAllPosts().subscribe(posts => {
       this.posts = posts;
       //this.subscribeToData();
     },
       error => console.log(error),
-      () => this.notificationService.emitSpiner(false));
+      () => this.notificationService.changeLoading(false));
   }
 
 

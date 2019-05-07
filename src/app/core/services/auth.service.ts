@@ -37,28 +37,19 @@ export class AuthService {
   }
 
   login(name: string, password: string) {
-    this.notificationService.emitSpiner(true);
+    //this.notificationService.emitSpiner(true);
+    this.notificationService.changeLoading(true);
     return this.http.post('https://blooming-reef-24719.herokuapp.com/api/users/login', { name, password })
       .subscribe(user => {
         localStorage.setItem('token', user['token']);
         localStorage.setItem('logged-user-id', user['user']['user_id']);
         localStorage.setItem('logged-user-name', user['user']['name']);
         localStorage.setItem("loggedin", "true");
-        this.router.navigate(['/home']).then(() => {
-          //location.reload(true);
-          //this.messageService.add({summary: "You are logged in!"}); 
-
-        });
-
-        this.notificationService.emit("You are logged in!");
-        //this.loggedIn.next(true);
-        //this.user.next(localStorage.getItem('logged-user-name'));
-        this.notificationService.emitUserName(localStorage.getItem('logged-user-name'));
-        this.notificationService.emitUserId(localStorage.getItem('logged-user-id'));
-        this.messageService.add({ severity: 'success', summary: "You are logged in!" });
+        this.router.navigate(['/home']);
+        this.notificationService.changeLoading(false);
       },
         error => this.handleError,
-        () => this.notificationService.emitSpiner(false));
+        () => this.notificationService.changeLoading(false));
 
   }
 

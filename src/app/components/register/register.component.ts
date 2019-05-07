@@ -36,12 +36,7 @@ export class RegisterComponent implements OnInit {
     const { username, password, firstName, lastName, email } = this.user;
     this.authService.register(username, password, firstName, lastName, email)
       .subscribe(res => {
-        if (res['message'] === "Username already exists!") {
-          this.notificationService.emit(res['message']);
-        } else {
-          this.notificationService.emit(res['message']);
-          this.router.navigate(['/login']);
-        }
+        this.router.navigate(['/login']);
       },
         error => console.log(error));
 

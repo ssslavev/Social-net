@@ -5,51 +5,12 @@ import { BehaviorSubject, Subject } from "rxjs";
   providedIn: 'root'
 })
 export class NotificationsService {
-  emitChange$: Subject<any> = new BehaviorSubject<any>(null);
-  username: Subject<any> = new BehaviorSubject<any>(null);
-  userId: Subject<any> = new BehaviorSubject<any>(null);
-  spiner: Subject<any> = new BehaviorSubject<any>(null);
-  emitFriends: Subject<any> = new BehaviorSubject<any>(null);
+  loading;
 
   constructor() { }
 
-  emitFr(value: any) {
-    this.emitFriends.next(value);
+  changeLoading(loading: boolean) {
+    this.loading = loading;
   }
 
-  get emitUserFriendsChange(): BehaviorSubject<any> {
-    return (this.emitFriends as BehaviorSubject<any>);
-  }
-
-  emit(value: any) {
-    this.emitChange$.next(value);
-  }
-
-  get emitChange(): BehaviorSubject<any> {
-    return (this.emitChange$ as BehaviorSubject<any>);
-  }
-
-  emitUserName(value:any) {
-    this.username.next(value);
-  }
-
-  emitSpiner(value: any) {
-    this.spiner.next(value);
-  }
-
- get getSpinerChange(): BehaviorSubject<any> {
-   return (this.spiner as BehaviorSubject<any>);
- } 
-
-  get emitUserNameChange() :BehaviorSubject<any> {
-    return (this.username as BehaviorSubject<any>);
-  }
-
-  emitUserId(value:any) {
-    this.userId.next(value);
-  }
-
-  get emitUserIdChange() :BehaviorSubject<any> {
-    return (this.userId as BehaviorSubject<any>);
-  }
 }

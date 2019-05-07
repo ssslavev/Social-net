@@ -1,19 +1,20 @@
-<p-toast [style]="{marginTop: '80px'}"></p-toast>
 <div class="container">
   <div class="row row-centered">
     <div class="col-md-6 mx-auto">
       <div id="image-upload" class="input-group">
         <div class="custom-file">
-          <input type="file"  accept="image/*" maxFileSize="10000000000" class="custom-file-input" (change)="op.toggle($event)" (change)="onFileSelect($event)"
-            id="inputGroupFile04" aria-describedby="inputGroupFileAddon04">
+          <input type="file" accept="image/*" maxFileSize="10000000000" class="custom-file-input"
+            (change)="op.toggle($event)" (change)="onFileSelect($event)" id="inputGroupFile04"
+            aria-describedby="inputGroupFileAddon04">
           <label class="custom-file-label" for="inputGroupFile04">Choose file</label>
         </div>
         <div class="input-group-append">
-          <button class="btn btn-outline-secondary" [disabled]="isDisabled" type="button" (click)="uploadFile()" id="inputGroupFileAddon04">Upload</button>
+          <button class="btn btn-outline-secondary" [disabled]="isDisabled" type="button" (click)="uploadFile()"
+            id="inputGroupFileAddon04">Upload</button>
         </div>
       </div>
       <p-overlayPanel #op>
-          <img *ngIf="imageSrc"  [src]= imageSrc alt="" srcset="">
+        <img *ngIf="imageSrc" [src]=imageSrc alt="" srcset="">
       </p-overlayPanel>
     </div>
   </div>
@@ -21,7 +22,8 @@
   <!-- Gallery -->
   <div class="row">
     <div *ngFor="let image of images" class="col-lg-3 col-md-4 col-sm-6 crop" data-toggle="modal" data-target="#modal">
-      <a href="#lightbox" data-slide-to="0"><img [src]="'data:image/jpeg;base64,'+image.image_data" class="img-thumbnail my-3"></a>
+      <a href="#lightbox" data-slide-to="0"><img [src]="'data:image/jpeg;base64,'+image.image_data"
+          class="img-thumbnail my-3"></a>
     </div>
   </div>
 </div>
