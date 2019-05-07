@@ -34,7 +34,7 @@ export class ResponseHandlerInterceptorService implements HttpInterceptor {
         this.toastr.error(err.error, "Error", { timeOut: 5000, });
         this.notificationService.changeLoading(false);
 
-        //console.log("ERROR", err.error);
+        console.log("ERROR", err);
       }
       throw err;
     }))

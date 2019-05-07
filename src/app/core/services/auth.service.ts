@@ -28,9 +28,9 @@ export class AuthService {
     private notificationService: NotificationsService,
     private messageService: MessageService) { }
 
-  register(name: string, password: string, firstName: string, lastName: string, email: string) {
+  register(name: string, password: string, firstName: string, lastName: string, email: string, gender: string) {
 
-    return this.http.post('https://blooming-reef-24719.herokuapp.com/api/users/register', { name, password, firstName, lastName, email })
+    return this.http.post('https://blooming-reef-24719.herokuapp.com/api/users/register', { name, password, firstName, lastName, email, gender })
       .pipe(catchError(this.handleError));
     //.subscribe(res => console.log(res),
     // error => console.log(error));

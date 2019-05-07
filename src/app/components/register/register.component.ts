@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from '../../core/services/auth.service'
 import { Router } from '@angular/router';
 import { NotificationsService } from 'src/app/core/services/notifications.service';
+import { formArrayNameProvider } from '@angular/forms/src/directives/reactive_directives/form_group_name';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -12,15 +14,8 @@ export class RegisterComponent implements OnInit {
 
   error;
   success;
+  form;
 
-
-  user = {
-    username: '',
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: ''
-  }
 
   constructor(private authService: AuthService,
     private router: Router,
@@ -29,12 +24,14 @@ export class RegisterComponent implements OnInit {
 
 
   ngOnInit() {
+
+
   }
 
-  registerUser() {
-
-    const { username, password, firstName, lastName, email } = this.user;
-    this.authService.register(username, password, firstName, lastName, email)
+  registerUser(form: NgForm) {
+    console.log(form.value);
+    const { username, password, firstName, lastName, email, gender } = form.value;
+    this.authService.register(username, password, firstName, lastName, email, gender)
       .subscribe(res => {
         this.router.navigate(['/login']);
       },

@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit {
 
   constructor(private postsService: PostsService,
     private notificationService: NotificationsService,
-    private messageService: MessageService) {
+  ) {
 
   }
 
