@@ -1,43 +1,25 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { BehaviorSubject, throwError } from 'rxjs';
+import { throwError } from 'rxjs';
 import { Router } from '@angular/router';
-import { retry, catchError } from 'rxjs/operators';
 import { NotificationsService } from './notifications.service';
-import { MessageService } from 'primeng/api';
-import { tokenKey } from '@angular/core/src/view';
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private isloggin: boolean;
-  private loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  private user: BehaviorSubject<string> = new BehaviorSubject<string>('');
-
-  get isLoggedIn() {
-    return this.loggedIn.asObservable();
-  }
-
-  get loggedUser() {
-    return this.user.asObservable();
-  }
-
   constructor(private http: HttpClient,
     private router: Router,
-    private notificationService: NotificationsService,
-    private messageService: MessageService) { }
+    private notificationService: NotificationsService) { }
 
   register(name: string, password: string, firstName: string, lastName: string, email: string, gender: string) {
-
+    this.notificationService.changeLoading(true);
     return this.http.post('https://blooming-reef-24719.herokuapp.com/api/users/register', { name, password, firstName, lastName, email, gender })
-      .pipe(catchError(this.handleError));
-    //.subscribe(res => console.log(res),
-    // error => console.log(error));
   }
 
   login(name: string, password: string) {
-    //this.notificationService.emitSpiner(true);
+
     this.notificationService.changeLoading(true);
     return this.http.post('https://blooming-reef-24719.herokuapp.com/api/users/login', { name, password })
       .subscribe(user => {
@@ -50,12 +32,6 @@ export class AuthService {
       },
         error => this.handleError,
         () => this.notificationService.changeLoading(false));
-
-  }
-
-  getToken() {
-    let token = localStorage.getItem('token');
-    return token;
   }
 
   private handleError(errorResponse: HttpErrorResponse) {
@@ -66,5 +42,10 @@ export class AuthService {
     }
 
     return throwError('There is a problem with a service');
+  }
+
+  getToken() {
+    let token = localStorage.getItem('token');
+    return token;
   }
 }

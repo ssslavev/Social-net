@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from '../../core/services/auth.service'
 import { Router } from '@angular/router';
 import { NotificationsService } from 'src/app/core/services/notifications.service';
-import { formArrayNameProvider } from '@angular/forms/src/directives/reactive_directives/form_group_name';
 import { NgForm } from '@angular/forms';
 
 @Component({
@@ -29,10 +28,12 @@ export class RegisterComponent implements OnInit {
   }
 
   registerUser(form: NgForm) {
-    console.log(form.value);
+
+    this.notificationService.changeLoading(true);
     const { username, password, firstName, lastName, email, gender } = form.value;
     this.authService.register(username, password, firstName, lastName, email, gender)
       .subscribe(res => {
+        this.notificationService.changeLoading(false);
         this.router.navigate(['/login']);
       },
         error => console.log(error));

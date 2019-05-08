@@ -4,6 +4,20 @@
 
 .panel-body {
     margin: 15px;
+    
+}
+
+#register-submit {
+  border-radius: 15px;
+}
+
+.panel-heading {
+  border-radius: 10px;
+}
+
+.panel-login {
+  background-color: #fff;
+  border-radius: 10px;
 }
 
 .panel-login>.panel-heading {
