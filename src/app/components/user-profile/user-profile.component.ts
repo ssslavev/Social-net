@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { forkJoin } from 'rxjs';
 import { MenuItem } from 'primeng/api'
 import { FriendReqService } from 'src/app/core/services/friend-req.service';
+import { ImagesService } from 'src/app/core/services/images.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -21,10 +22,12 @@ export class UserProfileComponent implements OnInit {
   areFriends;
   items: MenuItem[];
   requests;
+  image;
 
   constructor(private usersService: UsersService,
     private route: ActivatedRoute,
-    private reqService: FriendReqService) { }
+    private reqService: FriendReqService,
+    private imagesService: ImagesService) { }
 
   ngOnInit() {
 
@@ -50,12 +53,15 @@ export class UserProfileComponent implements OnInit {
             forkJoin(
               this.reqService.getFromReq(this.loggedUserId, this.userId),
               this.reqService.getToReq(this.userId, this.loggedUserId),
-              this.reqService.getFriends(this.loggedUserId, this.userId)
+              this.reqService.getFriends(this.loggedUserId, this.userId),
+              this.imagesService.getImagesByUserId(this.userId)
             )
-              .subscribe(([fromReq, toReq, friends]) => {
+              .subscribe(([fromReq, toReq, friends, image]) => {
                 this.fromReq = fromReq,
                   this.toReq = toReq,
-                  this.areFriends = friends
+                  this.areFriends = friends,
+                  this.image = image[0];
+                console.log(image[0]);
               })
         },
           error => console.error(error)

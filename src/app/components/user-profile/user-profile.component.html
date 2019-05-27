@@ -9,7 +9,7 @@
             <!-- http://lorempixel.com/850/280/people/9/ -->
           </div>
           <div class="useravatar">
-            <img alt="" src="../../../assets/images/27072741_10208620600791988_96416950358670516_n.jpg">
+            <img alt="" [src]="'data:image/jpeg;base64,'+image?.image_data">
           </div>
           <div class="card-info"> <span class="card-title">{{user[0].name}} {{user[0].user_id}}</span>
           </div>

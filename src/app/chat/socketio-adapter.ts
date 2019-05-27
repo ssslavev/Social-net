@@ -2,7 +2,7 @@ import { ChatAdapter, User, Message, ParticipantResponse, IChatParticipant, Chat
 import { Observable, of } from "rxjs";
 import { map, delay } from 'rxjs/operators';
 import { Socket } from 'ng-socket-io';
-import { Injectable } from '@angular/core';
+import { Injectable, DoCheck } from '@angular/core';
 import { FriendReqService } from '../core/services/friend-req.service';
 
 
@@ -10,13 +10,16 @@ import { FriendReqService } from '../core/services/friend-req.service';
 @Injectable()
 export class SocketIoAdapter extends ChatAdapter {
 
-    userId
+    userId;
     users;
+    participantsList;
 
 
-    constructor(private friendsReqService: FriendReqService) {
+    constructor(private friendsReqService: FriendReqService, private socket: Socket) {
         super();
 
+        this.initializeSocketListeners();
+        this.getFriends().subscribe((users) => this.participantsList = users);
     }
 
 
@@ -31,9 +34,10 @@ export class SocketIoAdapter extends ChatAdapter {
                         status: ChatParticipantStatus.Online,
                         avatar: 'https://thumbnail.myheritageimages.com/502/323/78502323/000/000114_884889c3n33qfe004v5024_C_64x64C.jpg',
                         displayName: user.name,
-                        id: user.user_id,
+                        id: +user.user_id,
                         participantType: ChatParticipantType.User
                     };
+
                     friendsList.push(person);
                 }
                 return friendsList
@@ -77,7 +81,7 @@ export class SocketIoAdapter extends ChatAdapter {
 
 
     getMessageHistory(userId: any): Observable<Message[]> {
-        let mockedHistory: Array<Message>;
+        /* let mockedHistory: Array<Message>;
 
         mockedHistory = [
             {
@@ -86,22 +90,39 @@ export class SocketIoAdapter extends ChatAdapter {
                 message: "Hi there, just type any message bellow to test this Angular module.",
                 dateSent: new Date()
             },
-            {
-                fromId: 999,
-                toId: 1,
-                message: "Hi there, just type any message bellow to test this Angular module.",
-                dateSent: new Date()
-            }
-
 
         ];
 
-        return of(mockedHistory).pipe(delay(2000));
+        return of(mockedHistory).pipe(delay(2000)); */
+
+        return null;
 
     }
 
     sendMessage(message: Message): void {
+
+        //console.log(message);
+
+        this.socket.emit('sendMessage', message);
+
     }
+
+
+
+    public initializeSocketListeners() {
+        this.socket.on('messageReceived', (message) => {
+
+
+
+            let participant;
+            participant = this.participantsList.find(x => x.participant.id == message.fromId).participant;
+            console.log(participant);
+
+            this.onMessageReceived(participant, message);
+
+        });
+
+    };
 
 
 } 

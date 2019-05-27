@@ -1,10 +1,11 @@
 import { Component, OnInit, DoCheck } from '@angular/core';
 import { MessageService } from 'primeng/api';
-import * as io from 'socket.io-client';
+import { Socket } from 'ng-socket-io';
 import { ChatAdapter } from 'ng-chat';
 import { SocketIoAdapter } from './chat/socketio-adapter';
 import { NotificationsService } from './core/services/notifications.service';
 import { FriendReqService } from './core/services/friend-req.service';
+
 
 
 @Component({
@@ -14,33 +15,41 @@ import { FriendReqService } from './core/services/friend-req.service';
 })
 export class AppComponent implements OnInit, DoCheck {
 
+
   id: number;
   loading;
-  userId;
+  userId = localStorage.getItem('logged-user-id');;
   filteredParticipants;
   isLoggedIn;
   adapter: ChatAdapter;
+  username = localStorage.getItem('logged-user-name');
 
-  constructor(private notificationService: NotificationsService,
-    private frReqService: FriendReqService) {
-    this.adapter = new SocketIoAdapter(this.frReqService);
+
+  constructor(private socket: Socket, private notificationService: NotificationsService,
+    private frReqService: FriendReqService,
+  ) {
+
+    this.adapter = new SocketIoAdapter(this.frReqService, this.socket);
+
   }
 
   ngOnInit() {
 
-    /*  const socket = io('http://localhost:3000');
-     this.adapter.listFriends().subscribe(res => this.filteredParticipants = res);
-     socket.on('connect', () => {
-       socket.on('chat', (data) => {
-       })
-     }) */
+    if (this.socket) {
+      console.log("Socket connected to Angular");
+
+
+    }
 
   }
 
   ngDoCheck(): void {
     this.isLoggedIn = localStorage.getItem('logged-user-id');
-    this.userId = +localStorage.getItem('logged-user-id');
+    this.userId = localStorage.getItem('logged-user-id');
     this.loading = this.notificationService.loading;
+
+
   }
+
 
 }

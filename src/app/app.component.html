@@ -3,7 +3,9 @@
 <div id="main">
 
     <p-progressSpinner strokeWidth="5" *ngIf="loading"></p-progressSpinner>
-    <ng-chat *ngIf="isLoggedIn" [adapter]="adapter" [userId]="userId" [theme]="'dark-theme'"></ng-chat>
+    <ng-chat *ngIf="isLoggedIn" [audioSource]='"../assets/sms-alert-3-daniel_simon.wav"' [adapter]="adapter"
+        [historyEnabled]="false" [userId]="userId" [theme]="'dark-theme'">
+    </ng-chat>
     <router-outlet></router-outlet>
 
 </div>
