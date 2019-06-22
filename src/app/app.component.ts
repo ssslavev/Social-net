@@ -18,7 +18,7 @@ export class AppComponent implements OnInit, DoCheck {
 
   id: number;
   loading;
-  userId = localStorage.getItem('logged-user-id');;
+  userId = localStorage.getItem('logged-user-id');
   filteredParticipants;
   isLoggedIn;
   adapter: ChatAdapter;

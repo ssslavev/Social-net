@@ -17,9 +17,15 @@ export class SocketIoAdapter extends ChatAdapter {
 
     constructor(private friendsReqService: FriendReqService, private socket: Socket) {
         super();
-
+        console.log('initialize adapter');
         this.initializeSocketListeners();
-        this.getFriends().subscribe((users) => this.participantsList = users);
+        this.getFriends().subscribe((users) => {
+            this.participantsList = users;
+            console.log(users);
+
+        });
+
+
     }
 
 
@@ -68,11 +74,11 @@ export class SocketIoAdapter extends ChatAdapter {
             }
 
             return participantResponseArray;
-        }))
+        }));
     }
 
 
-    listFriends(): Observable<ParticipantResponse[]> {
+    listFriends(): Observable<any> {
         return this.getFriends();
 
     }
@@ -107,12 +113,10 @@ export class SocketIoAdapter extends ChatAdapter {
 
 
     public initializeSocketListeners() {
+        console.log(this.participantsList);
         this.socket.on('messageReceived', (message) => {
-
-
-
             let participant;
-            participant = this.participantsList.find(x => x.participant.id === message.fromId).participant;
+            participant = this.participantsList.find(x => x.participant.id == message.fromId).participant;
             console.log(participant);
 
             this.onMessageReceived(participant, message);
