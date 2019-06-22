@@ -16,6 +16,7 @@ export class AuthService {
     private socket: Socket) { }
 
   register(name: string, password: string, firstName: string, lastName: string, email: string, gender: string) {
+    
     this.notificationService.changeLoading(true);
     return this.http.post('https://blooming-reef-24719.herokuapp.com/api/users/register', { name, password, firstName, lastName, email, gender })
   }

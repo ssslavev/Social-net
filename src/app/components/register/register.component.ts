@@ -28,10 +28,11 @@ export class RegisterComponent implements OnInit {
   }
 
   registerUser(form: NgForm) {
-
+    console.log(form.value);
     this.notificationService.changeLoading(true);
-    const { username, password, firstName, lastName, email, gender } = form.value;
-    this.authService.register(username, password, firstName, lastName, email, gender)
+    const { username, passwords, firstName, lastName, email, gender } = form.value;
+    
+    this.authService.register(username, passwords.password, firstName, lastName, email, gender)
       .subscribe(res => {
         this.notificationService.changeLoading(false);
         this.router.navigate(['/login']);
