@@ -14,7 +14,7 @@ import { NgChatModule } from 'ng-chat';
 import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
 import { ToastrModule } from 'ngx-toastr';
 
-const config: SocketIoConfig = { url: 'http://localhost:3001', options: {} };
+const config: SocketIoConfig = { url: 'https://social-net-chat-server.herokuapp.com', options: {} };
 
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './components/shared/navigation/navigation.component';

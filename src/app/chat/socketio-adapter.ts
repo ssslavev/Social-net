@@ -40,8 +40,8 @@ export class SocketIoAdapter extends ChatAdapter {
 
                     friendsList.push(person);
                 }
-                return friendsList
-            }))
+                return friendsList;
+            }));
     }
 
 
@@ -100,9 +100,6 @@ export class SocketIoAdapter extends ChatAdapter {
     }
 
     sendMessage(message: Message): void {
-
-        //console.log(message);
-
         this.socket.emit('sendMessage', message);
 
     }
@@ -115,14 +112,14 @@ export class SocketIoAdapter extends ChatAdapter {
 
 
             let participant;
-            participant = this.participantsList.find(x => x.participant.id == message.fromId).participant;
+            participant = this.participantsList.find(x => x.participant.id === message.fromId).participant;
             console.log(participant);
 
             this.onMessageReceived(participant, message);
 
         });
 
-    };
+    }
 
 
-} 
+}
