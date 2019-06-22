@@ -67,3 +67,7 @@
     </div>
   </div>
 </div>
+
+<ng-chat *ngIf="isLoggedIn" [audioSource]='"../assets/sms-alert-3-daniel_simon.wav"' [adapter]="adapter"
+  [historyEnabled]="false" [userId]="userId" [theme]="'dark-theme'">
+</ng-chat>

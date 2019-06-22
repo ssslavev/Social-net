@@ -21,7 +21,7 @@ export class AppComponent implements OnInit, DoCheck {
   userId = localStorage.getItem('logged-user-id');
   filteredParticipants;
   isLoggedIn;
-  adapter: ChatAdapter;
+
   username = localStorage.getItem('logged-user-name');
 
 
@@ -29,7 +29,7 @@ export class AppComponent implements OnInit, DoCheck {
     private frReqService: FriendReqService,
   ) {
 
-    this.adapter = new SocketIoAdapter(this.frReqService, this.socket);
+    //this.adapter = new SocketIoAdapter(this.frReqService, this.socket);
 
   }
 

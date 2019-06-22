@@ -1,8 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, DoCheck } from '@angular/core';
 import { PostsService } from 'src/app/core/services/posts.service';
 import { NotificationsService } from 'src/app/core/services/notifications.service';
 import { MessageService } from 'primeng/api';
 import { timer } from 'rxjs';
+import { ChatAdapter } from 'ng-chat';
+import { SocketIoAdapter } from 'src/app/chat/socketio-adapter';
+import { FriendReqService } from 'src/app/core/services/friend-req.service';
+import { Socket } from 'ng-socket-io';
 
 
 @Component({
@@ -10,7 +14,7 @@ import { timer } from 'rxjs';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, DoCheck {
 
 
   posts;
@@ -19,6 +23,9 @@ export class HomeComponent implements OnInit {
   timerSubscription;
   source = timer(5000);
   loading;
+  isLoggedIn;
+  userId = localStorage.getItem('logged-user-id');
+  adapter: ChatAdapter;
 
   post = {
     content: '',
@@ -29,8 +36,10 @@ export class HomeComponent implements OnInit {
 
   constructor(private postsService: PostsService,
     private notificationService: NotificationsService,
+    private frReqService: FriendReqService,
+    private socket: Socket
   ) {
-
+    this.adapter = new SocketIoAdapter(this.frReqService, this.socket);
   }
 
   ngOnInit() {
@@ -38,6 +47,14 @@ export class HomeComponent implements OnInit {
 
     this.postsService.getAllPosts()
       .subscribe(posts => this.posts = posts);
+
+
+  }
+
+  ngDoCheck(): void {
+    this.isLoggedIn = localStorage.getItem('logged-user-id');
+    this.userId = localStorage.getItem('logged-user-id');
+    this.loading = this.notificationService.loading;
 
 
   }
