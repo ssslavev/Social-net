@@ -5,6 +5,7 @@ import { ChatAdapter } from 'ng-chat';
 import { SocketIoAdapter } from './chat/socketio-adapter';
 import { NotificationsService } from './core/services/notifications.service';
 import { FriendReqService } from './core/services/friend-req.service';
+import { PingService } from './core/services/ping.service';
 
 
 
@@ -27,9 +28,10 @@ export class AppComponent implements OnInit, DoCheck {
 
   constructor(private socket: Socket, private notificationService: NotificationsService,
     private frReqService: FriendReqService,
+    private pingService: PingService
   ) {
 
-    //this.adapter = new SocketIoAdapter(this.frReqService, this.socket);
+    this.pingService.pingChatServer();
 
   }
 
