@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UsersService } from 'src/app/core/services/users.service';
 import { ActivatedRoute } from '@angular/router';
 import { forkJoin } from 'rxjs';
-import { MenuItem } from 'primeng/api'
+import { MenuItem } from 'primeng/api';
 import { FriendReqService } from 'src/app/core/services/friend-req.service';
 import { ImagesService } from 'src/app/core/services/images.service';
 
@@ -42,7 +42,7 @@ export class UserProfileComponent implements OnInit {
     this.loggedUserId = localStorage.getItem('logged-user-id');
     this.loggedUserName = localStorage.getItem('logged-user-name');
     this.route.paramMap.subscribe(params => {
-      this.userId = +params.get('id')
+      this.userId = +params.get('id');
 
 
 
@@ -62,7 +62,7 @@ export class UserProfileComponent implements OnInit {
                   this.areFriends = friends,
                   this.image = image[0];
                 console.log(image[0]);
-              })
+              });
         },
           error => console.error(error)
         );
@@ -83,7 +83,4 @@ export class UserProfileComponent implements OnInit {
       .subscribe(res => console.log(res),
         error => console.log(error));
   }
-
-
-
 }

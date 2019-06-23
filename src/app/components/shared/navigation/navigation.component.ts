@@ -1,9 +1,6 @@
-import { Component, OnInit, OnChanges, Input, OnDestroy, DoCheck } from '@angular/core';
+import { Component, OnInit, DoCheck } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/core/services/auth.service';
-import { Observable } from 'rxjs';
 import { MessageService } from 'primeng/api';
-import { NotificationsService } from 'src/app/core/services/notifications.service';
 import { FriendReqService } from 'src/app/core/services/friend-req.service';
 
 @Component({
@@ -33,35 +30,33 @@ export class NavigationComponent implements OnInit, DoCheck {
     this.user = localStorage.getItem('logged-user-name');
   }
 
-
-
   getRequests() {
     this.reqService.getAllRequests(this.isLoggedIn)
       .subscribe(requests => {
         this.requests = requests,
-          console.log(requests)
+          console.log(requests);
       });
   }
 
   logOut() {
     localStorage.clear();
-    this.router.navigate(['/login'])
-    //location.reload();
+    this.router.navigate(['/login']);
+    // location.reload();
   }
 
   acceptReq(isLoggedIn$, id) {
     this.reqService.acceptReq(isLoggedIn$, id)
       .subscribe(res => {
-        console.log(res)
-        this.messageService.add({ severity: 'success', summary: "You are now friends!" })
+        console.log(res);
+        this.messageService.add({ severity: 'success', summary: 'You are now friends!' });
 
       },
         error => console.log(error));
   }
 
   onSelect(request) {
-    let index = this.requests
-      .findIndex(localRequest => localRequest.friend_req_id == request.friend_req_id)
+    const index = this.requests
+      .findIndex(localRequest => localRequest.friend_req_id === request.friend_req_id);
     this.requests.splice(index, 1);
     this.deleteReq(this.isLoggedIn, request.from_user);
   }
@@ -70,7 +65,7 @@ export class NavigationComponent implements OnInit, DoCheck {
     this.reqService.deleteRequest(isLoggedIn$, id)
       .subscribe(result => console.log(result),
         error => console.log(error)
-      )
+      );
   }
 
 }

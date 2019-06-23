@@ -1,8 +1,17 @@
-import { ChatAdapter, User, Message, ParticipantResponse, IChatParticipant, ChatParticipantType, ParticipantMetadata, ChatParticipantStatus } from 'ng-chat';
-import { Observable, of } from "rxjs";
-import { map, delay } from 'rxjs/operators';
+import {
+    ChatAdapter,
+    Message,
+    ParticipantResponse,
+    IChatParticipant,
+    ChatParticipantType,
+    ParticipantMetadata,
+    ChatParticipantStatus
+} from 'ng-chat';
+
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Socket } from 'ng-socket-io';
-import { Injectable, DoCheck } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { FriendReqService } from '../core/services/friend-req.service';
 
 
@@ -10,10 +19,7 @@ import { FriendReqService } from '../core/services/friend-req.service';
 @Injectable()
 export class SocketIoAdapter extends ChatAdapter {
 
-    userId;
-    users;
     participantsList;
-
 
     constructor(private friendsReqService: FriendReqService, private socket: Socket) {
         super();
@@ -24,14 +30,11 @@ export class SocketIoAdapter extends ChatAdapter {
             console.log(users);
 
         });
-
-
     }
-
 
     get() {
 
-        let friendsList: IChatParticipant[] = new Array();
+        const friendsList: IChatParticipant[] = new Array();
         let person: IChatParticipant;
         return this.friendsReqService.getFriendsList()
             .pipe(map(users => {
@@ -52,9 +55,9 @@ export class SocketIoAdapter extends ChatAdapter {
 
 
     getFriends() {
-        let participantResponseArray: ParticipantResponse[] = new Array();
+        const participantResponseArray: ParticipantResponse[] = new Array();
         let participantResponse: ParticipantResponse;
-        let metadata = new ParticipantMetadata();
+        const metadata = new ParticipantMetadata();
         metadata.totalUnreadMessages = Math.floor(Math.random() * 11);
 
         return this.get().pipe(map(users => {
@@ -64,7 +67,7 @@ export class SocketIoAdapter extends ChatAdapter {
                     participant: participant,
                     metadata: metadata
 
-                }
+                };
 
                 participantResponseArray.push(participantResponse);
 
@@ -77,14 +80,10 @@ export class SocketIoAdapter extends ChatAdapter {
         }));
     }
 
-
     listFriends(): Observable<any> {
         return this.getFriends();
 
     }
-
-
-
 
     getMessageHistory(userId: any): Observable<Message[]> {
         /* let mockedHistory: Array<Message>;
@@ -110,20 +109,15 @@ export class SocketIoAdapter extends ChatAdapter {
 
     }
 
-
-
     public initializeSocketListeners() {
         console.log(this.participantsList);
         this.socket.on('messageReceived', (message) => {
             let participant;
-            participant = this.participantsList.find(x => x.participant.id == message.fromId).participant;
+            participant = this.participantsList.find(x => x.participant.id === +message.fromId).participant;
             console.log(participant);
 
             this.onMessageReceived(participant, message);
 
         });
-
     }
-
-
 }

@@ -16,7 +16,7 @@ export class PostsService {
   }
 
   addPost(content: string, user_id: number) {
-    return this.http.post('https://blooming-reef-24719.herokuapp.com/api/posts', {content, user_id})
+    return this.http.post('https://blooming-reef-24719.herokuapp.com/api/posts', {content, user_id});
   }
 
   getPostsByUser(userId: number): Observable<any> {

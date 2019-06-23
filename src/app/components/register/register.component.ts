@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { AuthService } from '../../core/services/auth.service'
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../core/services/auth.service';
 import { Router } from '@angular/router';
 import { NotificationsService } from 'src/app/core/services/notifications.service';
 import { NgForm } from '@angular/forms';
@@ -10,11 +10,6 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-
-  error;
-  success;
-  form;
-
 
   constructor(private authService: AuthService,
     private router: Router,
@@ -31,7 +26,7 @@ export class RegisterComponent implements OnInit {
     console.log(form.value);
     this.notificationService.changeLoading(true);
     const { username, passwords, firstName, lastName, email, gender } = form.value;
-    
+
     this.authService.register(username, passwords.password, firstName, lastName, email, gender)
       .subscribe(res => {
         this.notificationService.changeLoading(false);

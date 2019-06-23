@@ -6,7 +6,7 @@ import {  HttpClient } from '@angular/common/http';
 })
 export class ImagesService {
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) { }
 
   addImage(userId, image) {
     return this.http.post(`https://blooming-reef-24719.herokuapp.com/api/users/${userId}/pictures`, image);

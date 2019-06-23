@@ -1,8 +1,5 @@
 import { Component, OnInit, DoCheck } from '@angular/core';
-import { MessageService } from 'primeng/api';
 import { Socket } from 'ng-socket-io';
-import { ChatAdapter } from 'ng-chat';
-import { SocketIoAdapter } from './chat/socketio-adapter';
 import { NotificationsService } from './core/services/notifications.service';
 import { FriendReqService } from './core/services/friend-req.service';
 import { PingService } from './core/services/ping.service';
@@ -38,7 +35,7 @@ export class AppComponent implements OnInit, DoCheck {
   ngOnInit() {
 
     if (this.socket) {
-      console.log("Socket connected to Angular");
+      console.log('Socket connected to Angular');
 
 
     }
@@ -50,8 +47,6 @@ export class AppComponent implements OnInit, DoCheck {
     this.userId = localStorage.getItem('logged-user-id');
     this.loading = this.notificationService.loading;
 
-
   }
-
 
 }

@@ -1,8 +1,6 @@
 import { Component, OnInit, DoCheck } from '@angular/core';
 import { PostsService } from 'src/app/core/services/posts.service';
 import { NotificationsService } from 'src/app/core/services/notifications.service';
-import { MessageService } from 'primeng/api';
-import { timer } from 'rxjs';
 import { ChatAdapter } from 'ng-chat';
 import { SocketIoAdapter } from 'src/app/chat/socketio-adapter';
 import { FriendReqService } from 'src/app/core/services/friend-req.service';
@@ -20,8 +18,6 @@ export class HomeComponent implements OnInit, DoCheck {
   posts;
   id: number;
   postsSubscription;
-  timerSubscription;
-  source = timer(5000);
   loading;
   isLoggedIn;
   userId = localStorage.getItem('logged-user-id');
@@ -30,7 +26,7 @@ export class HomeComponent implements OnInit, DoCheck {
   post = {
     content: '',
     user_id: +localStorage.getItem('logged-user-id')
-  }
+  };
 
 
 
@@ -44,10 +40,8 @@ export class HomeComponent implements OnInit, DoCheck {
 
   ngOnInit() {
 
-
     this.postsService.getAllPosts()
       .subscribe(posts => this.posts = posts);
-
 
   }
 
@@ -59,40 +53,27 @@ export class HomeComponent implements OnInit, DoCheck {
 
   }
 
-
   addPost() {
-    //console.log('here');
     const { content, user_id } = this.post;
     console.log(user_id);
     this.postsService.addPost(content, user_id).subscribe(res => {
-      //console.log(res)
+      // console.log(res)
       this.post.content = null;
       this.refreshData();
     },
-      error => console.log(error));;
+      error => console.log(error));
 
   }
-
-  addClass(id) {
-    this.id = id;
-  }
-
 
   private refreshData(): void {
     this.notificationService.changeLoading(true);
     // console.log('refresh')
     this.postsSubscription = this.postsService.getAllPosts().subscribe(posts => {
       this.posts = posts;
-      //this.subscribeToData();
+      // this.subscribeToData();
     },
       error => console.log(error),
       () => this.notificationService.changeLoading(false));
   }
-
-
-  // private subscribeToData(): void {
-  //  let subs = this.source.pipe(first())
-  //  this.timerSubscription = subs.subscribe(() => this.refreshData());
-  //}
 
 }

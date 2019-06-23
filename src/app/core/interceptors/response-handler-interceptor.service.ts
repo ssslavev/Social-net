@@ -18,8 +18,8 @@ export class ResponseHandlerInterceptorService implements HttpInterceptor {
       if (success instanceof HttpResponse) {
         if (success.url.endsWith('login')) {
 
-          let userName = success.body.user.name;
-          let message = success.body.message;
+          const userName = success.body.user.name;
+          const message = success.body.message;
 
           this.toastr.success(`Hello, ${userName}! ${message}`);
 
@@ -27,19 +27,19 @@ export class ResponseHandlerInterceptorService implements HttpInterceptor {
           this.toastr.success(success.body.message + '! Pease login!');
         }
       }
-      //console.log('SUCCESS', success);
+      // console.log('SUCCESS', success);
 
     }), catchError((err) => {
-      if (err.error.message === "Username already exists!") {
+      if (err.error.message === 'Username already exists!') {
         this.toastr.error(err.error.message, 'Error', { timeOut: 5000 });
       } else {
 
-        this.toastr.error(err.error, "Error", { timeOut: 5000, });
+        this.toastr.error(err.error, 'Error', { timeOut: 5000, });
         this.notificationService.changeLoading(false);
 
-        console.log("ERROR", err);
+        console.log('ERROR', err);
       }
       throw err;
-    }))
-  };
+    }));
+  }
 }

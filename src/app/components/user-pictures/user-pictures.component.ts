@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MessageService } from 'primeng/api';
 import { ActivatedRoute } from '@angular/router';
 import { NotificationsService } from 'src/app/core/services/notifications.service';
 import { ImagesService } from 'src/app/core/services/images.service';
@@ -11,6 +10,11 @@ import { ImagesService } from 'src/app/core/services/images.service';
 })
 export class UserPicturesComponent implements OnInit {
 
+  constructor(
+    private imagesService: ImagesService,
+    private route: ActivatedRoute,
+    private notificationService: NotificationsService) { }
+
   images;
   selectedFile: File;
   fd: FormData;
@@ -19,31 +23,26 @@ export class UserPicturesComponent implements OnInit {
   imagesSubscription;
   imageSrc;
 
+  uploadedFiles: any[] = [];
+
   ngOnInit(): void {
 
     this.route.parent.params.subscribe(params => {
-      this.userId = params.id
+      this.userId = params.id;
       this.imagesService.getImagesByUserId(this.userId)
         .subscribe(images => this.images = images);
-    })
+    });
   }
-
-  uploadedFiles: any[] = [];
-
-  constructor(private messageService: MessageService,
-    private imagesService: ImagesService,
-    private route: ActivatedRoute,
-    private notificationService: NotificationsService) { }
 
   onFileSelect(event) {
     this.selectedFile = <File>event.target.files[0];
     this.isDisabled = false;
-    let fr = new FileReader();
+    const fr = new FileReader();
     fr.readAsDataURL(this.selectedFile);
     fr.onload = (_event) => {
 
       this.imageSrc = fr.result;
-    }
+    };
 
   }
 
@@ -54,7 +53,7 @@ export class UserPicturesComponent implements OnInit {
 
     this.imagesService.addImage(localStorage.getItem('logged-user-id'), this.fd)
       .subscribe(() => {
-        console.log("image is uploaded")
+        console.log('image is uploaded');
         this.refreshData();
       },
         error => console.log(error));
@@ -65,7 +64,7 @@ export class UserPicturesComponent implements OnInit {
     // console.log('refresh')
     this.imagesSubscription = this.imagesService.getImagesByUserId(this.userId).subscribe(images => {
       this.images = images;
-      //this.subscribeToData();
+      // this.subscribeToData();
     },
       error => console.log(error),
       () => this.notificationService.changeLoading(false));
